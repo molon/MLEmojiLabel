@@ -175,11 +175,11 @@ static inline NSDictionary * NSAttributedStringAttributesFromLabel(TTTAttributed
         paragraphStyle.firstLineHeadIndent = label.firstLineIndent;
         paragraphStyle.headIndent = paragraphStyle.firstLineHeadIndent;
 
-        if (label.numberOfLines == 1) {
+//        if (label.numberOfLines == 1) {
             paragraphStyle.lineBreakMode = label.lineBreakMode;
-        } else {
-            paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-        }
+//        } else {
+//            paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+//        }
 
         [mutableAttributes setObject:paragraphStyle forKey:(NSString *)kCTParagraphStyleAttributeName];
     } else {
@@ -199,9 +199,9 @@ static inline NSDictionary * NSAttributedStringAttributesFromLabel(TTTAttributed
         CGFloat firstLineIndent = label.firstLineIndent;
 
         CTLineBreakMode lineBreakMode = kCTLineBreakByWordWrapping;
-        if (label.numberOfLines == 1) {
+//        if (label.numberOfLines == 1) {
             lineBreakMode = CTLineBreakModeFromTTTLineBreakMode(label.lineBreakMode);
-        }
+//        }
 
         CTParagraphStyleSetting paragraphStyles[12] = {
             {.spec = kCTParagraphStyleSpecifierAlignment, .valueSize = sizeof(CTTextAlignment), .value = (const void *)&alignment},
@@ -322,8 +322,6 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     if (!self) {
         return nil;
     }
-
-    [self commonInit];
 
     return self;
 }

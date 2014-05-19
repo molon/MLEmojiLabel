@@ -13,13 +13,13 @@
 #define REGULAREXPRESSION_OPTION(regularExpression,regex,option) \
 \
 static inline NSRegularExpression * k##regularExpression() { \
-    static NSRegularExpression *_##regularExpression = nil; \
-    static dispatch_once_t onceToken; \
-    dispatch_once(&onceToken, ^{ \
-        _##regularExpression = [[NSRegularExpression alloc] initWithPattern:(regex) options:(option) error:nil];\
-    });\
-    \
-    return _##regularExpression;\
+static NSRegularExpression *_##regularExpression = nil; \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+_##regularExpression = [[NSRegularExpression alloc] initWithPattern:(regex) options:(option) error:nil];\
+});\
+\
+return _##regularExpression;\
 }\
 
 
@@ -50,33 +50,63 @@ NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@
 
 /**
  *  TTT很鸡巴。commonInit是被调用了两回。如果直接init的话，因为init其中会调用initWithFrame
- *  回头建议修改
+ *  PS.已经在里面把init里的修改掉了
  */
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.delegate = self;
-        self.numberOfLines = 0;
-        self.font = [UIFont systemFontOfSize:15];
-        self.textColor = [UIColor blackColor];
-        self.backgroundColor = [UIColor clearColor];
-        self.lineBreakMode = NSLineBreakByCharWrapping;
+- (void)commonInit {
+    self.userInteractionEnabled = YES;
+    self.multipleTouchEnabled = NO;
+    
+    self.delegate = self;
+    self.numberOfLines = 0;
+    self.font = [UIFont systemFontOfSize:14.0];
+    self.textColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor clearColor];
+    
+    /**
+     *  这里需要注意，TTT里默认把numberOfLines不为1的情况下实际绘制的lineBreakMode是以word方式。
+     *  而默认UILabel似乎也是这样处理的。我不知道为何。已经做修改。
+     */
+    self.lineBreakMode = NSLineBreakByCharWrapping;
+    
+    self.textInsets = UIEdgeInsetsZero;
+    self.lineHeightMultiple = 1.0f;
+    self.lineSpacing = 3.0; //默认行间距
+    
+    [self setValue:[NSArray array] forKey:@"links"];
+    
+    NSMutableDictionary *mutableLinkAttributes = [NSMutableDictionary dictionary];
+    [mutableLinkAttributes setObject:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
+    
+    NSMutableDictionary *mutableActiveLinkAttributes = [NSMutableDictionary dictionary];
+    [mutableActiveLinkAttributes setObject:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
+    
+    NSMutableDictionary *mutableInactiveLinkAttributes = [NSMutableDictionary dictionary];
+    [mutableInactiveLinkAttributes setObject:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
+    
+    UIColor *commonLinkColor = [UIColor colorWithRed:0.112 green:0.000 blue:0.791 alpha:1.000];
+    
+    //点击时候的背景色
+    [mutableActiveLinkAttributes setValue:(__bridge id)[[UIColor colorWithWhite:0.631 alpha:1.000] CGColor] forKey:(NSString *)kTTTBackgroundFillColorAttributeName];
+    
+    if ([NSMutableParagraphStyle class]) {
+        [mutableLinkAttributes setObject:commonLinkColor forKey:(NSString *)kCTForegroundColorAttributeName];
+        [mutableActiveLinkAttributes setObject:commonLinkColor forKey:(NSString *)kCTForegroundColorAttributeName];
+        [mutableInactiveLinkAttributes setObject:[UIColor grayColor] forKey:(NSString *)kCTForegroundColorAttributeName];
         
-        //设置链接样式
-        NSMutableDictionary *mutableLinkAttributes = [self.linkAttributes mutableCopy];
-        [mutableLinkAttributes setValue:[NSNumber numberWithBool:NO] forKey:(__bridge NSString *)kCTUnderlineStyleAttributeName];
-        [mutableLinkAttributes setValue:(__bridge id)[[UIColor colorWithRed:0.112 green:0.000 blue:0.791 alpha:1.000] CGColor] forKey:(__bridge NSString *)kCTForegroundColorAttributeName];
-        self.linkAttributes = mutableLinkAttributes;
         
-        //设置按下链接样式
-        NSMutableDictionary *mutableActiveLinkAttributes = [self.activeLinkAttributes mutableCopy];
-        [mutableActiveLinkAttributes setValue:(__bridge id)[[UIColor colorWithRed:0.112 green:0.000 blue:0.791 alpha:1.000] CGColor] forKey:(__bridge NSString *)kCTForegroundColorAttributeName];
-        [mutableActiveLinkAttributes setValue:(__bridge id)[[UIColor colorWithWhite:0.631 alpha:1.000] CGColor] forKey:(NSString *)kTTTBackgroundFillColorAttributeName];
-        self.activeLinkAttributes = mutableActiveLinkAttributes;
-
+        //把原有TTT的NSMutableParagraphStyle设置给去掉了。会影响到整个段落的设置
+    } else {
+        [mutableLinkAttributes setObject:(__bridge id)[commonLinkColor CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
+        [mutableActiveLinkAttributes setObject:(__bridge id)[commonLinkColor CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
+        [mutableInactiveLinkAttributes setObject:(__bridge id)[[UIColor grayColor] CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
+        
+        
+        //把原有TTT的NSMutableParagraphStyle设置给去掉了。会影响到整个段落的设置
     }
-    return self;
+    
+    self.linkAttributes = [NSDictionary dictionaryWithDictionary:mutableLinkAttributes];
+    self.activeLinkAttributes = [NSDictionary dictionaryWithDictionary:mutableActiveLinkAttributes];
+    self.inactiveLinkAttributes = [NSDictionary dictionaryWithDictionary:mutableInactiveLinkAttributes];
 }
 
 /**
@@ -95,7 +125,12 @@ NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@
 
 - (void)setEmojiText:(NSString*)emojiText
 {
+    
     [self setText:emojiText];
+    //  afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+    //        //这里可以做些处理，暂时不需要。
+    //        return mutableAttributedString;
+    //    }];
     
     NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc]initWithString:emojiText];
     NSRange stringRange = NSMakeRange(0, mutableAttributedString.length);
@@ -108,6 +143,14 @@ NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@
     for (NSUInteger i=0; i<maxIndex; i++) {
         NSString *urlAction = kURLActions[i];
         [regexps[i] enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL *stop) {
+            
+            //检查是否和之前记录的有交集，有的话则忽略
+            for (NSTextCheckingResult *record in results){
+                if (NSMaxRange(NSIntersectionRange(record.range, result.range))>0){
+                    return;
+                }
+            }
+            
             //添加链接
             NSString *actionString = [NSString stringWithFormat:@"%@%@",urlAction,[emojiText substringWithRange:result.range]];
             
@@ -130,7 +173,9 @@ NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@
 - (void)setIsNeedAtAndPoundSign:(BOOL)isNeedAtAndPoundSign
 {
     _isNeedAtAndPoundSign = isNeedAtAndPoundSign;
-    [self setEmojiText:self.text];
+    if (self.text){
+        [self setEmojiText:self.text];
+    }
 }
 
 #pragma mark - delegate

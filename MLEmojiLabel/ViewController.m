@@ -38,9 +38,9 @@
     backFrame.size.height += 13+13+7;
     self.textBackImageView.frame = backFrame;
     
-    //    [self.view addSubview:self.label];
-    //    self.label.frame = CGRectMake(50, 250, 250, 100);
-    //    [self.label sizeToFit];
+        [self.view addSubview:self.label];
+        self.label.frame = CGRectMake(50, 250, 250, 100);
+        [self.label sizeToFit];
     
     
 }
@@ -56,9 +56,10 @@
 	if (!_emojiLabel) {
         _emojiLabel = [[MLEmojiLabel alloc]init];
         _emojiLabel.numberOfLines = 0;
+        _emojiLabel.isNeedAtAndPoundSign = YES;
 		[_emojiLabel setEmojiText:@"链接:http://baidu.com电话18120136012邮箱dudl@qq.com@某某某 ,###哈哈哈### ,[大笑] 啊是大三的@阿萨德.com@dsad@dad"];
         _emojiLabel.emojiDelegate = self;
-        _emojiLabel.isNeedAtAndPoundSign = YES;
+        
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByCharWrapping;
 	}
@@ -72,8 +73,16 @@
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor blackColor];
         label.font = [UIFont systemFontOfSize:14.0f];
+        label.lineBreakMode = NSLineBreakByCharWrapping;
         label.numberOfLines = 0;
         label.text = @"链接:http://baidu.com电话18120136012邮箱dudl@qq.com@某某某 ,###哈哈哈### ,[大笑] 啊是大三的@阿萨德.com";
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:label.text ];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:5.0];
+        [paragraphStyle setLineBreakMode:NSLineBreakByCharWrapping];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [label.text length])];
+        
+        label.attributedText = attributedString;
         
         _label = label;
     }
