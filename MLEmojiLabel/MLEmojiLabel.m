@@ -63,7 +63,7 @@ NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@
     self.backgroundColor = [UIColor clearColor];
     
     /**
-     *  这里需要注意，TTT里默认把numberOfLines不为1的情况下实际绘制的lineBreakMode是以word方式。
+     *  PS:这里需要注意，TTT里默认把numberOfLines不为1的情况下实际绘制的lineBreakMode是以word方式。
      *  而默认UILabel似乎也是这样处理的。我不知道为何。已经做修改。
      */
     self.lineBreakMode = NSLineBreakByCharWrapping;
