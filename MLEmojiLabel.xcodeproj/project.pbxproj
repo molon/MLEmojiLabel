@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		364A89201929B07200BAFB8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A891F1929B07200BAFB8C /* Foundation.framework */; };
+		364A89221929B07200BAFB8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89211929B07200BAFB8C /* CoreGraphics.framework */; };
+		364A89241929B07200BAFB8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89231929B07200BAFB8C /* UIKit.framework */; };
+		364A892A1929B07200BAFB8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 364A89281929B07200BAFB8C /* InfoPlist.strings */; };
+		364A892C1929B07200BAFB8C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 364A892B1929B07200BAFB8C /* main.m */; };
+		364A89301929B07200BAFB8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 364A892F1929B07200BAFB8C /* AppDelegate.m */; };
+		364A89331929B07200BAFB8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364A89311929B07200BAFB8C /* Main.storyboard */; };
+		364A89361929B07200BAFB8C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 364A89351929B07200BAFB8C /* ViewController.m */; };
+		364A89381929B07200BAFB8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364A89371929B07200BAFB8C /* Images.xcassets */; };
+		364A893F1929B07200BAFB8C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A893E1929B07200BAFB8C /* XCTest.framework */; };
+		364A89401929B07200BAFB8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A891F1929B07200BAFB8C /* Foundation.framework */; };
+		364A89411929B07200BAFB8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89231929B07200BAFB8C /* UIKit.framework */; };
+		364A89491929B07200BAFB8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 364A89471929B07200BAFB8C /* InfoPlist.strings */; };
+		364A894B1929B07200BAFB8C /* MLEmojiLabelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 364A894A1929B07200BAFB8C /* MLEmojiLabelTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		364A89421929B07200BAFB8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 364A89141929B07200BAFB8C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 364A891B1929B07200BAFB8C;
+			remoteInfo = MLEmojiLabel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		364A891C1929B07200BAFB8C /* MLEmojiLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLEmojiLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		364A891F1929B07200BAFB8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		364A89211929B07200BAFB8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		364A89231929B07200BAFB8C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		364A89271929B07200BAFB8C /* MLEmojiLabel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MLEmojiLabel-Info.plist"; sourceTree = "<group>"; };
+		364A89291929B07200BAFB8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		364A892B1929B07200BAFB8C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		364A892D1929B07200BAFB8C /* MLEmojiLabel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLEmojiLabel-Prefix.pch"; sourceTree = "<group>"; };
+		364A892E1929B07200BAFB8C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		364A892F1929B07200BAFB8C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		364A89321929B07200BAFB8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		364A89341929B07200BAFB8C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		364A89351929B07200BAFB8C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		364A89371929B07200BAFB8C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		364A893D1929B07200BAFB8C /* MLEmojiLabelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLEmojiLabelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		364A893E1929B07200BAFB8C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		364A89461929B07200BAFB8C /* MLEmojiLabelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MLEmojiLabelTests-Info.plist"; sourceTree = "<group>"; };
+		364A89481929B07200BAFB8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		364A894A1929B07200BAFB8C /* MLEmojiLabelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLEmojiLabelTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		364A89191929B07200BAFB8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364A89221929B07200BAFB8C /* CoreGraphics.framework in Frameworks */,
+				364A89241929B07200BAFB8C /* UIKit.framework in Frameworks */,
+				364A89201929B07200BAFB8C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364A893A1929B07200BAFB8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364A893F1929B07200BAFB8C /* XCTest.framework in Frameworks */,
+				364A89411929B07200BAFB8C /* UIKit.framework in Frameworks */,
+				364A89401929B07200BAFB8C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		364A89131929B07200BAFB8C = {
+			isa = PBXGroup;
+			children = (
+				364A89251929B07200BAFB8C /* MLEmojiLabel */,
+				364A89441929B07200BAFB8C /* MLEmojiLabelTests */,
+				364A891E1929B07200BAFB8C /* Frameworks */,
+				364A891D1929B07200BAFB8C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		364A891D1929B07200BAFB8C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				364A891C1929B07200BAFB8C /* MLEmojiLabel.app */,
+				364A893D1929B07200BAFB8C /* MLEmojiLabelTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		364A891E1929B07200BAFB8C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				364A891F1929B07200BAFB8C /* Foundation.framework */,
+				364A89211929B07200BAFB8C /* CoreGraphics.framework */,
+				364A89231929B07200BAFB8C /* UIKit.framework */,
+				364A893E1929B07200BAFB8C /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		364A89251929B07200BAFB8C /* MLEmojiLabel */ = {
+			isa = PBXGroup;
+			children = (
+				364A892E1929B07200BAFB8C /* AppDelegate.h */,
+				364A892F1929B07200BAFB8C /* AppDelegate.m */,
+				364A89311929B07200BAFB8C /* Main.storyboard */,
+				364A89341929B07200BAFB8C /* ViewController.h */,
+				364A89351929B07200BAFB8C /* ViewController.m */,
+				364A89371929B07200BAFB8C /* Images.xcassets */,
+				364A89261929B07200BAFB8C /* Supporting Files */,
+			);
+			path = MLEmojiLabel;
+			sourceTree = "<group>";
+		};
+		364A89261929B07200BAFB8C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				364A89271929B07200BAFB8C /* MLEmojiLabel-Info.plist */,
+				364A89281929B07200BAFB8C /* InfoPlist.strings */,
+				364A892B1929B07200BAFB8C /* main.m */,
+				364A892D1929B07200BAFB8C /* MLEmojiLabel-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		364A89441929B07200BAFB8C /* MLEmojiLabelTests */ = {
+			isa = PBXGroup;
+			children = (
+				364A894A1929B07200BAFB8C /* MLEmojiLabelTests.m */,
+				364A89451929B07200BAFB8C /* Supporting Files */,
+			);
+			path = MLEmojiLabelTests;
+			sourceTree = "<group>";
+		};
+		364A89451929B07200BAFB8C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				364A89461929B07200BAFB8C /* MLEmojiLabelTests-Info.plist */,
+				364A89471929B07200BAFB8C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		364A891B1929B07200BAFB8C /* MLEmojiLabel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364A894E1929B07200BAFB8C /* Build configuration list for PBXNativeTarget "MLEmojiLabel" */;
+			buildPhases = (
+				364A89181929B07200BAFB8C /* Sources */,
+				364A89191929B07200BAFB8C /* Frameworks */,
+				364A891A1929B07200BAFB8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MLEmojiLabel;
+			productName = MLEmojiLabel;
+			productReference = 364A891C1929B07200BAFB8C /* MLEmojiLabel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		364A893C1929B07200BAFB8C /* MLEmojiLabelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 364A89511929B07200BAFB8C /* Build configuration list for PBXNativeTarget "MLEmojiLabelTests" */;
+			buildPhases = (
+				364A89391929B07200BAFB8C /* Sources */,
+				364A893A1929B07200BAFB8C /* Frameworks */,
+				364A893B1929B07200BAFB8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				364A89431929B07200BAFB8C /* PBXTargetDependency */,
+			);
+			name = MLEmojiLabelTests;
+			productName = MLEmojiLabelTests;
+			productReference = 364A893D1929B07200BAFB8C /* MLEmojiLabelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		364A89141929B07200BAFB8C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = molon;
+				TargetAttributes = {
+					364A893C1929B07200BAFB8C = {
+						TestTargetID = 364A891B1929B07200BAFB8C;
+					};
+				};
+			};
+			buildConfigurationList = 364A89171929B07200BAFB8C /* Build configuration list for PBXProject "MLEmojiLabel" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 364A89131929B07200BAFB8C;
+			productRefGroup = 364A891D1929B07200BAFB8C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				364A891B1929B07200BAFB8C /* MLEmojiLabel */,
+				364A893C1929B07200BAFB8C /* MLEmojiLabelTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		364A891A1929B07200BAFB8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364A89381929B07200BAFB8C /* Images.xcassets in Resources */,
+				364A892A1929B07200BAFB8C /* InfoPlist.strings in Resources */,
+				364A89331929B07200BAFB8C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364A893B1929B07200BAFB8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364A89491929B07200BAFB8C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		364A89181929B07200BAFB8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364A89361929B07200BAFB8C /* ViewController.m in Sources */,
+				364A89301929B07200BAFB8C /* AppDelegate.m in Sources */,
+				364A892C1929B07200BAFB8C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		364A89391929B07200BAFB8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364A894B1929B07200BAFB8C /* MLEmojiLabelTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		364A89431929B07200BAFB8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 364A891B1929B07200BAFB8C /* MLEmojiLabel */;
+			targetProxy = 364A89421929B07200BAFB8C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		364A89281929B07200BAFB8C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				364A89291929B07200BAFB8C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		364A89311929B07200BAFB8C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				364A89321929B07200BAFB8C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		364A89471929B07200BAFB8C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				364A89481929B07200BAFB8C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		364A894C1929B07200BAFB8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		364A894D1929B07200BAFB8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		364A894F1929B07200BAFB8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MLEmojiLabel/MLEmojiLabel-Prefix.pch";
+				INFOPLIST_FILE = "MLEmojiLabel/MLEmojiLabel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		364A89501929B07200BAFB8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MLEmojiLabel/MLEmojiLabel-Prefix.pch";
+				INFOPLIST_FILE = "MLEmojiLabel/MLEmojiLabel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		364A89521929B07200BAFB8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MLEmojiLabel.app/MLEmojiLabel";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MLEmojiLabel/MLEmojiLabel-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MLEmojiLabelTests/MLEmojiLabelTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		364A89531929B07200BAFB8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MLEmojiLabel.app/MLEmojiLabel";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MLEmojiLabel/MLEmojiLabel-Prefix.pch";
+				INFOPLIST_FILE = "MLEmojiLabelTests/MLEmojiLabelTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		364A89171929B07200BAFB8C /* Build configuration list for PBXProject "MLEmojiLabel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364A894C1929B07200BAFB8C /* Debug */,
+				364A894D1929B07200BAFB8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		364A894E1929B07200BAFB8C /* Build configuration list for PBXNativeTarget "MLEmojiLabel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364A894F1929B07200BAFB8C /* Debug */,
+				364A89501929B07200BAFB8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		364A89511929B07200BAFB8C /* Build configuration list for PBXNativeTarget "MLEmojiLabelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364A89521929B07200BAFB8C /* Debug */,
+				364A89531929B07200BAFB8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 364A89141929B07200BAFB8C /* Project object */;
+}
