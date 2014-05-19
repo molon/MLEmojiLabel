@@ -21,6 +21,10 @@
 		364A89411929B07200BAFB8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89231929B07200BAFB8C /* UIKit.framework */; };
 		364A89491929B07200BAFB8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 364A89471929B07200BAFB8C /* InfoPlist.strings */; };
 		364A894B1929B07200BAFB8C /* MLEmojiLabelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 364A894A1929B07200BAFB8C /* MLEmojiLabelTests.m */; };
+		364A89571929B08200BAFB8C /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 364A89561929B08100BAFB8C /* TTTAttributedLabel.m */; };
+		364A895A1929B09400BAFB8C /* MLEmojiLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 364A89591929B09400BAFB8C /* MLEmojiLabel.m */; };
+		369EBEC61929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369EBEC41929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png */; };
+		369EBEC71929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369EBEC51929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,12 @@
 		364A89461929B07200BAFB8C /* MLEmojiLabelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MLEmojiLabelTests-Info.plist"; sourceTree = "<group>"; };
 		364A89481929B07200BAFB8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		364A894A1929B07200BAFB8C /* MLEmojiLabelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLEmojiLabelTests.m; sourceTree = "<group>"; };
+		364A89551929B08100BAFB8C /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		364A89561929B08100BAFB8C /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		364A89581929B09400BAFB8C /* MLEmojiLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLEmojiLabel.h; sourceTree = "<group>"; };
+		364A89591929B09400BAFB8C /* MLEmojiLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLEmojiLabel.m; sourceTree = "<group>"; };
+		369EBEC41929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg_ios7@2x.png"; sourceTree = "<group>"; };
+		369EBEC51929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkgHL_ios7@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +92,7 @@
 		364A89131929B07200BAFB8C = {
 			isa = PBXGroup;
 			children = (
+				364A89541929B08100BAFB8C /* TTTAttributedLabel */,
 				364A89251929B07200BAFB8C /* MLEmojiLabel */,
 				364A89441929B07200BAFB8C /* MLEmojiLabelTests */,
 				364A891E1929B07200BAFB8C /* Frameworks */,
@@ -112,6 +123,8 @@
 		364A89251929B07200BAFB8C /* MLEmojiLabel */ = {
 			isa = PBXGroup;
 			children = (
+				369EBEC41929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png */,
+				369EBEC51929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png */,
 				364A892E1929B07200BAFB8C /* AppDelegate.h */,
 				364A892F1929B07200BAFB8C /* AppDelegate.m */,
 				364A89311929B07200BAFB8C /* Main.storyboard */,
@@ -119,6 +132,8 @@
 				364A89351929B07200BAFB8C /* ViewController.m */,
 				364A89371929B07200BAFB8C /* Images.xcassets */,
 				364A89261929B07200BAFB8C /* Supporting Files */,
+				364A89581929B09400BAFB8C /* MLEmojiLabel.h */,
+				364A89591929B09400BAFB8C /* MLEmojiLabel.m */,
 			);
 			path = MLEmojiLabel;
 			sourceTree = "<group>";
@@ -150,6 +165,15 @@
 				364A89471929B07200BAFB8C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		364A89541929B08100BAFB8C /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				364A89551929B08100BAFB8C /* TTTAttributedLabel.h */,
+				364A89561929B08100BAFB8C /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,8 +253,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				364A89381929B07200BAFB8C /* Images.xcassets in Resources */,
+				369EBEC61929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png in Resources */,
 				364A892A1929B07200BAFB8C /* InfoPlist.strings in Resources */,
 				364A89331929B07200BAFB8C /* Main.storyboard in Resources */,
+				369EBEC71929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +277,9 @@
 			files = (
 				364A89361929B07200BAFB8C /* ViewController.m in Sources */,
 				364A89301929B07200BAFB8C /* AppDelegate.m in Sources */,
+				364A895A1929B09400BAFB8C /* MLEmojiLabel.m in Sources */,
 				364A892C1929B07200BAFB8C /* main.m in Sources */,
+				364A89571929B08200BAFB8C /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +484,7 @@
 				364A89501929B07200BAFB8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		364A89511929B07200BAFB8C /* Build configuration list for PBXNativeTarget "MLEmojiLabelTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +493,7 @@
 				364A89531929B07200BAFB8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
