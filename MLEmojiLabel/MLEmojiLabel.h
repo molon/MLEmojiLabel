@@ -17,9 +17,21 @@ typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
     MLEmojiLabelLinkTypePoundSign,
 };
 
+@class MLEmojiLabel;
+@protocol MLEmojiLabelDelegate <NSObject>
+
+@optional
+- (void)mlEmojiLabel:(MLEmojiLabel*)emojiLabel didSelectLink:(NSString*)link withType:(MLEmojiLabelLinkType)type;
+
+
+@end
+
 @interface MLEmojiLabel : TTTAttributedLabel
 
 @property (nonatomic, assign) BOOL isNeedAtAndPoundSign;
+
+@property (nonatomic, weak) id<MLEmojiLabelDelegate> emojiDelegate;
+
 
 - (void)setEmojiText:(NSString*)emojiText;
 

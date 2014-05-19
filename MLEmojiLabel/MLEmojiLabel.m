@@ -126,6 +126,12 @@ NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@
     
 }
 
+#pragma mark - setter
+- (void)setIsNeedAtAndPoundSign:(BOOL)isNeedAtAndPoundSign
+{
+    _isNeedAtAndPoundSign = isNeedAtAndPoundSign;
+    [self setEmojiText:self.text];
+}
 
 #pragma mark - delegate
 - (void)attributedLabel:(TTTAttributedLabel *)label
@@ -136,7 +142,10 @@ didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
         for (NSUInteger i=0; i<kURLActionCount; i++) {
             if ([result.replacementString hasPrefix:kURLActions[i]]) {
                 NSString *content = [result.replacementString substringFromIndex:kURLActions[i].length];
-                NSLog(@"%ld:%@",i,content);
+                if(self.emojiDelegate&&[self.emojiDelegate respondsToSelector:@selector(mlEmojiLabel:didSelectLink:withType:)]){
+                    //type的数组和i刚好对应
+                    [self.emojiDelegate mlEmojiLabel:self didSelectLink:content withType:i];
+                }
             }
         }
     }

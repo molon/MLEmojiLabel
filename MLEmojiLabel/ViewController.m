@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "MLEmojiLabel.h"
 
-@interface ViewController ()
+@interface ViewController ()<MLEmojiLabelDelegate>
 
 @property (nonatomic, strong) MLEmojiLabel *emojiLabel;
 
@@ -38,9 +38,9 @@
     backFrame.size.height += 13+13+7;
     self.textBackImageView.frame = backFrame;
     
-//    [self.view addSubview:self.label];
-//    self.label.frame = CGRectMake(50, 250, 250, 100);
-//    [self.label sizeToFit];
+    //    [self.view addSubview:self.label];
+    //    self.label.frame = CGRectMake(50, 250, 250, 100);
+    //    [self.label sizeToFit];
     
     
 }
@@ -56,7 +56,9 @@
 	if (!_emojiLabel) {
         _emojiLabel = [[MLEmojiLabel alloc]init];
         _emojiLabel.numberOfLines = 0;
-		[_emojiLabel setEmojiText:@"链接:http://baidu.com电话18120136012邮箱dudl@qq.com@某某某 ,###哈哈哈### ,[大笑] 啊是大三的@阿萨德.com"];
+		[_emojiLabel setEmojiText:@"链接:http://baidu.com电话18120136012邮箱dudl@qq.com@某某某 ,###哈哈哈### ,[大笑] 啊是大三的@阿萨德.com@dsad@dad"];
+        _emojiLabel.emojiDelegate = self;
+        _emojiLabel.isNeedAtAndPoundSign = YES;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByCharWrapping;
 	}
@@ -92,4 +94,28 @@
     return _textBackImageView;
 }
 
+- (void)mlEmojiLabel:(MLEmojiLabel*)emojiLabel didSelectLink:(NSString*)link withType:(MLEmojiLabelLinkType)type
+{
+    switch(type){
+        case MLEmojiLabelLinkTypeURL:
+            NSLog(@"点击了链接%@",link);
+            break;
+        case MLEmojiLabelLinkTypePhoneNumber:
+            NSLog(@"点击了电话%@",link);
+            break;
+        case MLEmojiLabelLinkTypeEmail:
+            NSLog(@"点击了邮箱%@",link);
+            break;
+        case MLEmojiLabelLinkTypeAt:
+            NSLog(@"点击了用户%@",link);
+            break;
+        case MLEmojiLabelLinkTypePoundSign:
+            NSLog(@"点击了话题%@",link);
+            break;
+        default:
+            NSLog(@"点击了不知道啥%@",link);
+            break;
+    }
+    
+}
 @end
