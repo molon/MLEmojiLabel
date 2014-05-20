@@ -46,6 +46,8 @@ const CGFloat kAscentDescentScale = 0.25; //在这里的话无意义，高度的
 
 const CGFloat kEmojiMargin = 0.0f;
 const CGFloat kEmojiWidth = 22.0+kEmojiMargin*2;
+
+const CGFloat kEmojiOriginYOffset = 2.0; //表情绘制的y坐标矫正值，越大越往下
 NSString *const kCustomGlyphAttributeImageName = @"CustomGlyphAttributeImageName";
 
 
@@ -55,7 +57,6 @@ NSString *const kCustomGlyphAttributeImageName = @"CustomGlyphAttributeImageName
 NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@"poundSign->"};
 
 @interface MLEmojiLabel()<TTTAttributedLabelDelegate>
-
 
 @end
 
@@ -246,7 +247,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 
                 UIImage *image = [UIImage imageNamed:imageName];
                 runBounds.origin.x += kEmojiMargin;
-                runBounds.origin.y += kEmojiMargin/2; //经过测试发觉不除以2的有点多。具体没必要研究了。
+                runBounds.origin.y -= kEmojiOriginYOffset; //稍微矫正下。
                 runBounds.size.width -= kEmojiMargin*2;
                 runBounds.size.height -= kEmojiMargin*2;
                 CGContextDrawImage(c, runBounds, image.CGImage);
