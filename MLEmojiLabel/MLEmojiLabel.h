@@ -17,6 +17,7 @@ typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
     MLEmojiLabelLinkTypePoundSign,
 };
 
+
 @class MLEmojiLabel;
 @protocol MLEmojiLabelDelegate <NSObject>
 
@@ -32,7 +33,6 @@ typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
 
 @property (nonatomic, weak) id<MLEmojiLabelDelegate> emojiDelegate;
 
-
-- (void)setEmojiText:(NSString*)emojiText;
+@property (nonatomic, copy) NSString *emojiText;
 
 @end

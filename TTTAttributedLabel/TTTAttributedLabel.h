@@ -450,4 +450,10 @@ didSelectLinkWithTransitInformation:(NSDictionary *)components;
 - (void)attributedLabel:(TTTAttributedLabel *)label
 didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
 
+
+//Molon添加
+- (void)drawOtherForEndWithFrame:(CTFrameRef)frame
+                          inRect:(CGRect)rect
+                         context:(CGContextRef)c;
+
 @end

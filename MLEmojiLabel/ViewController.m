@@ -38,9 +38,9 @@
     backFrame.size.height += 13+13+7;
     self.textBackImageView.frame = backFrame;
     
-        [self.view addSubview:self.label];
-        self.label.frame = CGRectMake(50, 250, 250, 100);
-        [self.label sizeToFit];
+//        [self.view addSubview:self.label];
+//        self.label.frame = CGRectMake(50, 250, 250, 100);
+//        [self.label sizeToFit];
     
     
 }
@@ -56,12 +56,14 @@
 	if (!_emojiLabel) {
         _emojiLabel = [[MLEmojiLabel alloc]init];
         _emojiLabel.numberOfLines = 0;
-        _emojiLabel.isNeedAtAndPoundSign = YES;
-		[_emojiLabel setEmojiText:@"链接:http://baidu.com电话18120136012邮箱dudl@qq.com@某某某 ,###哈哈哈### ,[大笑] 啊是大三的@阿萨德.com@dsad@dad"];
+        _emojiLabel.font = [UIFont systemFontOfSize:16.0f];
+		[_emojiLabel setEmojiText:@"链接:http://baidu.com电话18120136012邮箱dudl@qq.com@某某某 ,###哈哈哈###[s]#,[可爱]啊是大三的@阿萨德.com@dsad@dad天使。。@天使asas @[吃惊]sds  #ds#as# @asd_sad @asd-fdsf  #_dsad_# #阿萨德撒-asd[asd]#  [ - ] [-][吃惊][吃惊][吃惊][吃惊]"];
+//        [_emojiLabel setEmojiText:@"asd[可爱]dd[吃惊]asdas"];
         _emojiLabel.emojiDelegate = self;
+//        _emojiLabel.textAlignment = NSTextAlignmentCenter;
         
         _emojiLabel.backgroundColor = [UIColor clearColor];
-        _emojiLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _emojiLabel.lineBreakMode = NSLineBreakByWordWrapping;
 	}
 	return _emojiLabel;
 }

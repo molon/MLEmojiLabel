@@ -826,9 +826,19 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     }
 
     [self drawStrike:frame inRect:rect context:c];
+    
+    //Molon添加
+    [self drawOtherForEndWithFrame:frame inRect:rect context:c];
 
     CFRelease(frame);
     CFRelease(path);
+}
+
+- (void)drawOtherForEndWithFrame:(CTFrameRef)frame
+           inRect:(CGRect)rect
+          context:(CGContextRef)c
+{
+    //这里预留留作重载
 }
 
 - (void)drawBackground:(CTFrameRef)frame
