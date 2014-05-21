@@ -48,7 +48,7 @@ const CGFloat kLineSpacing = 4.0;
 const CGFloat kAscentDescentScale = 0.25; //在这里的话无意义，高度的结局都是和宽度一样
 
 const CGFloat kEmojiMargin = 0.0f;
-const CGFloat kEmojiWidth = 22.0+kEmojiMargin*2;
+const CGFloat kEmojiWidth = 24.0+kEmojiMargin*2;
 
 const CGFloat kEmojiOriginYOffset = 2.0; //表情绘制的y坐标矫正值，越大越往下
 NSString *const kCustomGlyphAttributeImageName = @"CustomGlyphAttributeImageName";
