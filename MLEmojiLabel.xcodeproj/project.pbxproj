@@ -130,8 +130,10 @@
 		36C3B717192B3D7A00B6063D /* Expression_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B6A7192B3D7A00B6063D /* Expression_9@2x.png */; };
 		36C3B71A192B3D7A00B6063D /* MLEmojiLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3B6AB192B3D7A00B6063D /* MLEmojiLabel.m */; };
 		36C3B71B192B3D7A00B6063D /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3B6AE192B3D7A00B6063D /* TTTAttributedLabel.m */; };
-		36C3B720192B424700B6063D /* expression.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B71E192B424700B6063D /* expression.plist */; };
-		36C3B721192B424700B6063D /* expressionImage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B71F192B424700B6063D /* expressionImage.plist */; };
+		36C3B720192B424700B6063D /* expression_CH.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B71E192B424700B6063D /* expression_CH.plist */; };
+		36C3B721192B424700B6063D /* expressionImage_CH.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B71F192B424700B6063D /* expressionImage_CH.plist */; };
+		36C3B7DF192C6CEF00B6063D /* expression.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B7DD192C6CEE00B6063D /* expression.plist */; };
+		36C3B7E0192C6CEF00B6063D /* expressionImage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B7DE192C6CEE00B6063D /* expressionImage.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,8 +277,10 @@
 		36C3B6AB192B3D7A00B6063D /* MLEmojiLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLEmojiLabel.m; sourceTree = "<group>"; };
 		36C3B6AD192B3D7A00B6063D /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		36C3B6AE192B3D7A00B6063D /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
-		36C3B71E192B424700B6063D /* expression.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expression.plist; sourceTree = "<group>"; };
-		36C3B71F192B424700B6063D /* expressionImage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expressionImage.plist; sourceTree = "<group>"; };
+		36C3B71E192B424700B6063D /* expression_CH.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expression_CH.plist; sourceTree = "<group>"; };
+		36C3B71F192B424700B6063D /* expressionImage_CH.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expressionImage_CH.plist; sourceTree = "<group>"; };
+		36C3B7DD192C6CEE00B6063D /* expression.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expression.plist; sourceTree = "<group>"; };
+		36C3B7DE192C6CEE00B6063D /* expressionImage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expressionImage.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,10 +386,12 @@
 		36C3B63D192B3D7A00B6063D /* MLEmoji */ = {
 			isa = PBXGroup;
 			children = (
+				36C3B7DD192C6CEE00B6063D /* expression.plist */,
+				36C3B7DE192C6CEE00B6063D /* expressionImage.plist */,
 				36C3B6AC192B3D7A00B6063D /* TTTAttributedLabel */,
 				36C3B63E192B3D7A00B6063D /* Expression */,
-				36C3B71E192B424700B6063D /* expression.plist */,
-				36C3B71F192B424700B6063D /* expressionImage.plist */,
+				36C3B71E192B424700B6063D /* expression_CH.plist */,
+				36C3B71F192B424700B6063D /* expressionImage_CH.plist */,
 				36C3B6AA192B3D7A00B6063D /* MLEmojiLabel.h */,
 				36C3B6AB192B3D7A00B6063D /* MLEmojiLabel.m */,
 			);
@@ -641,6 +647,7 @@
 				36C3B6F3192B3D7A00B6063D /* Expression_67@2x.png in Resources */,
 				36C3B6B3192B3D7A00B6063D /* Expression_104@2x.png in Resources */,
 				36C3B6B5192B3D7A00B6063D /* Expression_10@2x.png in Resources */,
+				36C3B7E0192C6CEF00B6063D /* expressionImage.plist in Resources */,
 				36C3B705192B3D7A00B6063D /* Expression_83@2x.png in Resources */,
 				364A89381929B07200BAFB8C /* Images.xcassets in Resources */,
 				36C3B6DA192B3D7A00B6063D /* Expression_44@2x.png in Resources */,
@@ -678,7 +685,7 @@
 				36C3B6FE192B3D7A00B6063D /* Expression_77@2x.png in Resources */,
 				36C3B6EF192B3D7A00B6063D /* Expression_63@2x.png in Resources */,
 				36C3B6FB192B3D7A00B6063D /* Expression_74@2x.png in Resources */,
-				36C3B720192B424700B6063D /* expression.plist in Resources */,
+				36C3B720192B424700B6063D /* expression_CH.plist in Resources */,
 				36C3B6FC192B3D7A00B6063D /* Expression_75@2x.png in Resources */,
 				36C3B6F5192B3D7A00B6063D /* Expression_69@2x.png in Resources */,
 				36C3B6BB192B3D7A00B6063D /* Expression_16@2x.png in Resources */,
@@ -687,7 +694,7 @@
 				36C3B6D1192B3D7A00B6063D /* Expression_36@2x.png in Resources */,
 				36C3B6DC192B3D7A00B6063D /* Expression_46@2x.png in Resources */,
 				36C3B707192B3D7A00B6063D /* Expression_85@2x.png in Resources */,
-				36C3B721192B424700B6063D /* expressionImage.plist in Resources */,
+				36C3B721192B424700B6063D /* expressionImage_CH.plist in Resources */,
 				36C3B6CE192B3D7A00B6063D /* Expression_33@2x.png in Resources */,
 				36C3B6AF192B3D7A00B6063D /* Expression_100@2x.png in Resources */,
 				36C3B6F9192B3D7A00B6063D /* Expression_72@2x.png in Resources */,
@@ -695,6 +702,7 @@
 				36C3B716192B3D7A00B6063D /* Expression_99@2x.png in Resources */,
 				36C3B702192B3D7A00B6063D /* Expression_80@2x.png in Resources */,
 				36C3B6C7192B3D7A00B6063D /* Expression_27@2x.png in Resources */,
+				36C3B7DF192C6CEF00B6063D /* expression.plist in Resources */,
 				36C3B712192B3D7A00B6063D /* Expression_95@2x.png in Resources */,
 				36C3B6D6192B3D7A00B6063D /* Expression_40@2x.png in Resources */,
 				36C3B6C2192B3D7A00B6063D /* Expression_22@2x.png in Resources */,
