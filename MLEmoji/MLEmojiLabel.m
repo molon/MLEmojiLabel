@@ -41,8 +41,8 @@ REGULAREXPRESSION_OPTION(PoundSignRegularExpression, @"#([\\u4e00-\\u9fa5\\w\\-]
 //微信的表情符其实不是这种格式，这个格式的只是让人看起来更友好。。
 //REGULAREXPRESSION(EmojiRegularExpression, @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]")
 
-//@"/:[\\w:~!@$&*()|+<>',?-]{1,8}" , // @"/:[\x21-\x2E\x30-\x7E]{1,8}" ，经过检测发现\w会匹配中文，好奇葩。
-REGULAREXPRESSION(SlashEmojiRegularExpression, @"/:[\x21-\x2E\x30-\x7E]{1,8}")
+//@"/:[\\w:~!@$&*()|+<>',?-]{1,8}" , // @"/:[\\x21-\\x2E\\x30-\\x7E]{1,8}" ，经过检测发现\w会匹配中文，好奇葩。
+REGULAREXPRESSION(SlashEmojiRegularExpression, @"/:[\\x21-\\x2E\\x30-\\x7E]{1,8}")
 
 const CGFloat kLineSpacing = 4.0;
 const CGFloat kAscentDescentScale = 0.25; //在这里的话无意义，高度的结局都是和宽度一样
