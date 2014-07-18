@@ -7,7 +7,7 @@ MLEmojiLabel
 继承自TTTAttributedLabel，所以可以像label一样使用。
 label的特性全都有，使用起来更友好更方便。
 
-![MLEmojiLabel](https://raw.githubusercontent.com/molon/MLEmojiLabel/master/MLEmojiLabel.jpg)
+![MLEmojiLabel](https://raw.githubusercontent.com/molon/MLEmojiLabel/master/MLEmojiLabel.png)
 
 
 

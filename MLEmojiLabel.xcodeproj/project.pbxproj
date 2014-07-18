@@ -132,6 +132,8 @@
 		36C3B71B192B3D7A00B6063D /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3B6AE192B3D7A00B6063D /* TTTAttributedLabel.m */; };
 		36C3B721192B424700B6063D /* expressionImage_custom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B71F192B424700B6063D /* expressionImage_custom.plist */; };
 		36C3B7E0192C6CEF00B6063D /* expressionImage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36C3B7DE192C6CEE00B6063D /* expressionImage.plist */; };
+		36C4DBC219790BAA00731042 /* MLEmojiLabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 36C4DBC019790BAA00731042 /* MLEmojiLabel.png */; };
+		36C4DBC319790BAA00731042 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 36C4DBC119790BAA00731042 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,6 +279,8 @@
 		36C3B6AE192B3D7A00B6063D /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		36C3B71F192B424700B6063D /* expressionImage_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = expressionImage_custom.plist; path = ../MLEmoji/expressionImage_custom.plist; sourceTree = "<group>"; };
 		36C3B7DE192C6CEE00B6063D /* expressionImage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expressionImage.plist; sourceTree = "<group>"; };
+		36C4DBC019790BAA00731042 /* MLEmojiLabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MLEmojiLabel.png; sourceTree = "<group>"; };
+		36C4DBC119790BAA00731042 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +310,8 @@
 		364A89131929B07200BAFB8C = {
 			isa = PBXGroup;
 			children = (
+				36C4DBC019790BAA00731042 /* MLEmojiLabel.png */,
+				36C4DBC119790BAA00731042 /* README.md */,
 				364A89251929B07200BAFB8C /* MLEmojiLabel */,
 				364A89441929B07200BAFB8C /* MLEmojiLabelTests */,
 				364A891E1929B07200BAFB8C /* Frameworks */,
@@ -681,6 +687,7 @@
 				36C3B6FB192B3D7A00B6063D /* Expression_74@2x.png in Resources */,
 				36C3B6FC192B3D7A00B6063D /* Expression_75@2x.png in Resources */,
 				36C3B6F5192B3D7A00B6063D /* Expression_69@2x.png in Resources */,
+				36C4DBC219790BAA00731042 /* MLEmojiLabel.png in Resources */,
 				36C3B6BB192B3D7A00B6063D /* Expression_16@2x.png in Resources */,
 				36C3B70D192B3D7A00B6063D /* Expression_90@2x.png in Resources */,
 				36C3B6CB192B3D7A00B6063D /* Expression_30@2x.png in Resources */,
@@ -696,6 +703,7 @@
 				36C3B702192B3D7A00B6063D /* Expression_80@2x.png in Resources */,
 				36C3B6C7192B3D7A00B6063D /* Expression_27@2x.png in Resources */,
 				36C3B712192B3D7A00B6063D /* Expression_95@2x.png in Resources */,
+				36C4DBC319790BAA00731042 /* README.md in Resources */,
 				36C3B6D6192B3D7A00B6063D /* Expression_40@2x.png in Resources */,
 				36C3B6C2192B3D7A00B6063D /* Expression_22@2x.png in Resources */,
 				36C3B6D3192B3D7A00B6063D /* Expression_38@2x.png in Resources */,
