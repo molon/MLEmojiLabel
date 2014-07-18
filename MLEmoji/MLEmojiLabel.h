@@ -29,7 +29,13 @@ typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
 
 @interface MLEmojiLabel : TTTAttributedLabel
 
+@property (nonatomic, assign) BOOL disableEmoji;
+@property (nonatomic, assign) BOOL disableThreeCommon; //禁用电话，邮箱，连接三者
+
 @property (nonatomic, assign) BOOL isNeedAtAndPoundSign;
+
+@property (nonatomic, copy) NSString *customEmojiRegex;
+@property (nonatomic, copy) NSString *customEmojiPlistName; //xxxxx.plist 格式
 
 @property (nonatomic, weak) id<MLEmojiLabelDelegate> emojiDelegate;
 

@@ -61,6 +61,9 @@ NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@
 
 @interface MLEmojiLabel()<TTTAttributedLabelDelegate>
 
+@property (nonatomic, strong) NSRegularExpression *customEmojiRegularExpression;
+@property (nonatomic, strong) NSDictionary *customEmojiDictionary;
+
 @end
 
 @implementation MLEmojiLabel
@@ -278,9 +281,18 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 //                                                         options:NSMatchingWithTransparentBounds
 //                                                           range:NSMakeRange(0, [emojiText length])];
 
-    NSArray *emojis = [kSlashEmojiRegularExpression() matchesInString:emojiText
-                                                         options:NSMatchingWithTransparentBounds
-                                                           range:NSMakeRange(0, [emojiText length])];
+    NSArray *emojis = nil;
+    
+    if (self.customEmojiRegularExpression) {
+        //自定义表情正则
+        emojis = [self.customEmojiRegularExpression matchesInString:emojiText
+                        options:NSMatchingWithTransparentBounds
+                        range:NSMakeRange(0, [emojiText length])];
+    }else{
+        emojis = [kSlashEmojiRegularExpression() matchesInString:emojiText
+                                                options:NSMatchingWithTransparentBounds
+                                                  range:NSMakeRange(0, [emojiText length])];
+    }
     
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] init];
     NSUInteger location = 0;
@@ -295,22 +307,25 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         
 		NSString *emojiKey = [emojiText substringWithRange:range];
         
-        //微信的表情没有结束符号,所以有可能会发现过长的只有头部才是表情的段，需要循环检测一次。微信最大表情特殊字符是8个长度，检测8次即可
-        NSDictionary *emojiDict = [MLEmojiLabel emojiDictionary];
+        
+        NSDictionary *emojiDict = self.customEmojiRegularExpression?self.customEmojiDictionary:[MLEmojiLabel emojiDictionary];
         
         //如果当前获得key后面有多余的，这个需要记录下
         NSMutableAttributedString *otherAppendStr = nil;
         
 		NSString *imageName = emojiDict[emojiKey];
-        if (!imageName&&emojiKey.length>2) {
-            NSUInteger maxDetctIndex = emojiKey.length>8+2?8:emojiKey.length-2;
-            //从头开始检测是否有对应的
-            for (NSUInteger i=0; i<maxDetctIndex; i++) {
-//                NSLog(@"%@",[emojiKey substringToIndex:3+i]);
-                imageName = emojiDict[[emojiKey substringToIndex:3+i]];
-                if (imageName) {
-                    otherAppendStr  = [[NSMutableAttributedString alloc]initWithString:[emojiKey substringFromIndex:3+i]];
-                    break;
+        if (!self.customEmojiRegularExpression) {
+            //微信的表情没有结束符号,所以有可能会发现过长的只有头部才是表情的段，需要循环检测一次。微信最大表情特殊字符是8个长度，检测8次即可
+            if (!imageName&&emojiKey.length>2) {
+                NSUInteger maxDetctIndex = emojiKey.length>8+2?8:emojiKey.length-2;
+                //从头开始检测是否有对应的
+                for (NSUInteger i=0; i<maxDetctIndex; i++) {
+                    //                NSLog(@"%@",[emojiKey substringToIndex:3+i]);
+                    imageName = emojiDict[[emojiKey substringToIndex:3+i]];
+                    if (imageName) {
+                        otherAppendStr  = [[NSMutableAttributedString alloc]initWithString:[emojiKey substringFromIndex:3+i]];
+                        break;
+                    }
                 }
             }
         }
@@ -370,7 +385,14 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         return;
     }
     
-    NSMutableAttributedString *mutableAttributedString = [self mutableAttributeStringWithEmojiText:emojiText];
+    NSMutableAttributedString *mutableAttributedString = nil;
+    
+    if (self.disableEmoji) {
+        mutableAttributedString = [[NSMutableAttributedString alloc]initWithString:emojiText];
+    }else{
+        mutableAttributedString = [self mutableAttributeStringWithEmojiText:emojiText];
+    }
+    
     [self setText:mutableAttributedString afterInheritingLabelAttributesAndConfiguringWithBlock:nil];
     
     NSRange stringRange = NSMakeRange(0, mutableAttributedString.length);
@@ -381,6 +403,9 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     
     NSUInteger maxIndex = self.isNeedAtAndPoundSign?kURLActionCount:kURLActionCount-2;
     for (NSUInteger i=0; i<maxIndex; i++) {
+        if (self.disableThreeCommon&&i<kURLActionCount-2) {
+            continue;
+        }
         NSString *urlAction = kURLActions[i];
         [regexps[i] enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL *stop) {
             
@@ -419,6 +444,48 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 - (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode
 {
     [super setLineBreakMode:lineBreakMode];
+    self.emojiText = self.emojiText; //简单重新绘制处理下
+}
+
+- (void)setDisableEmoji:(BOOL)disableEmoji
+{
+    _disableEmoji = disableEmoji;
+    self.emojiText = self.emojiText; //简单重新绘制处理下
+}
+
+- (void)setDisableThreeCommon:(BOOL)disableThreeCommon
+{
+    _disableThreeCommon = disableThreeCommon;
+    self.emojiText = self.emojiText; //简单重新绘制处理下
+}
+
+- (void)setCustomEmojiRegex:(NSString *)customEmojiRegex
+{
+    _customEmojiRegex = customEmojiRegex;
+    
+    if (customEmojiRegex&&customEmojiRegex.length>0) {
+        self.customEmojiRegularExpression = [[NSRegularExpression alloc] initWithPattern:customEmojiRegex options:NSRegularExpressionCaseInsensitive error:nil];
+    }else{
+        self.customEmojiRegularExpression = nil;
+    }
+    
+    self.emojiText = self.emojiText; //简单重新绘制处理下
+}
+
+- (void)setCustomEmojiPlistName:(NSString *)customEmojiPlistName
+{
+    _customEmojiPlistName = customEmojiPlistName;
+    
+    if (customEmojiPlistName&&customEmojiPlistName.length>0) {
+        if (![customEmojiPlistName hasSuffix:@".plist"]) {
+            customEmojiPlistName = [customEmojiPlistName stringByAppendingString:@".plist"];
+        }
+        NSString *emojiFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:customEmojiPlistName];
+	    self.customEmojiDictionary = [[NSDictionary alloc] initWithContentsOfFile:emojiFilePath];
+    }else{
+        self.customEmojiDictionary = nil;
+    }
+    
     self.emojiText = self.emojiText; //简单重新绘制处理下
 }
 
