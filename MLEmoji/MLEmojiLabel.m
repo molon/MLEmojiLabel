@@ -47,12 +47,10 @@ REGULAREXPRESSION(SlashEmojiRegularExpression, @"/:[\\x21-\\x2E\\x30-\\x7E]{1,8}
 const CGFloat kLineSpacing = 4.0;
 const CGFloat kAscentDescentScale = 0.25; //在这里的话无意义，高度的结局都是和宽度一样
 
-const CGFloat kEmojiMargin = 0.0f;
-const CGFloat kEmojiWidth = 24.0+kEmojiMargin*2;
+const CGFloat kEmojiWidthRatioWithLineHeight = 1.25;//和字体高度的比例
 
-const CGFloat kEmojiOriginYOffset = 2.0; //表情绘制的y坐标矫正值，越大越往下
+const CGFloat kEmojiOriginYOffsetRatioWithLineHeight = 0.10; //表情绘制的y坐标矫正值，和字体高度的比例，越大越往下
 NSString *const kCustomGlyphAttributeImageName = @"CustomGlyphAttributeImageName";
-
 
 #define kEmojiReplaceCharacter @"\uFFFC"
 
@@ -206,6 +204,8 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 {
     //PS:这个是在TTT里drawFramesetter....方法最后做了修改的基础上。
     
+    CGFloat emojiOriginYOffset = self.font.lineHeight*kEmojiOriginYOffsetRatioWithLineHeight;
+    
     //找到行
     NSArray *lines = (__bridge NSArray *)CTFrameGetLines(frame);
     //找到每行的origin，保存起来
@@ -256,10 +256,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
                 runBounds.origin.y -= runDescent;
                 
                 UIImage *image = [UIImage imageNamed:imageName];
-                runBounds.origin.x += kEmojiMargin;
-                runBounds.origin.y -= kEmojiOriginYOffset; //稍微矫正下。
-                runBounds.size.width -= kEmojiMargin*2;
-                runBounds.size.height -= kEmojiMargin*2;
+                runBounds.origin.y -= emojiOriginYOffset; //稍微矫正下。
                 CGContextDrawImage(c, runBounds, image.CGImage);
             }
         }
@@ -297,6 +294,8 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] init];
     NSUInteger location = 0;
     
+    
+    CGFloat emojiWith = self.font.lineHeight*kEmojiWidthRatioWithLineHeight;
     for (NSTextCheckingResult *result in emojis) {
         NSRange range = result.range;
 		NSString *subStr = [emojiText substringWithRange:NSMakeRange(location, range.location - location)];
@@ -349,7 +348,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
             
 			// 这里设置下需要绘制的图片的大小，这里我自定义了一个结构体以便于存储数据
 			CustomGlyphMetricsRef metrics = malloc(sizeof(CustomGlyphMetrics));
-            metrics->width = kEmojiWidth;
+            metrics->width = emojiWith;
 			metrics->ascent = 1/(1+kAscentDescentScale)*metrics->width;
 			metrics->descent = metrics->ascent*kAscentDescentScale;
 			CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, metrics);

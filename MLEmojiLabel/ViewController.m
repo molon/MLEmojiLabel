@@ -56,7 +56,8 @@
 	if (!_emojiLabel) {
         _emojiLabel = [[MLEmojiLabel alloc]init];
         _emojiLabel.numberOfLines = 0;
-        _emojiLabel.font = [UIFont systemFontOfSize:16.0f];
+        _emojiLabel.font = [UIFont systemFontOfSize:14.0f];
+        NSLog(@"%f",_emojiLabel.font.lineHeight);
         _emojiLabel.emojiDelegate = self;
         //        _emojiLabel.textAlignment = NSTextAlignmentCenter;
         _emojiLabel.backgroundColor = [UIColor clearColor];
