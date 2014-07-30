@@ -55,7 +55,7 @@ NSString *const kCustomGlyphAttributeImageName = @"CustomGlyphAttributeImageName
 #define kEmojiReplaceCharacter @"\uFFFC"
 
 #define kURLActionCount 5
-NSString * const kURLActions[] = {@"url->",@"phoneNumber->",@"email->",@"at->",@"poundSign->"};
+NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@"poundSign->"};
 
 @interface MLEmojiLabel()<TTTAttributedLabelDelegate>
 
@@ -396,7 +396,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     
     NSRange stringRange = NSMakeRange(0, mutableAttributedString.length);
     
-    NSRegularExpression * const regexps[] = {kURLRegularExpression(),kPhoneNumerRegularExpression(),kEmailRegularExpression(),kAtRegularExpression(),kPoundSignRegularExpression()};
+    NSRegularExpression * const regexps[] = {kURLRegularExpression(),kEmailRegularExpression(),kPhoneNumerRegularExpression(),kAtRegularExpression(),kPoundSignRegularExpression()};
     
     NSMutableArray *results = [NSMutableArray array];
     
