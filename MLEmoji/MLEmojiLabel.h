@@ -41,4 +41,6 @@ typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
 
 @property (nonatomic, copy) NSString *emojiText; //设置处理文字
 
+- (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth;
+
 @end

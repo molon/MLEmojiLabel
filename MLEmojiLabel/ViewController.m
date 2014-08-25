@@ -28,8 +28,8 @@
     
     [self.view addSubview:self.textBackImageView];
     [self.view addSubview:self.emojiLabel];
-    self.emojiLabel.frame = CGRectMake(50, 100, 250, 100);
-    [self.emojiLabel sizeToFit];
+    CGSize size = [self.emojiLabel preferredSizeWithMaxWidth:250.0f];
+    self.emojiLabel.frame = CGRectMake(30, 100, size.width, size.height);
     
     CGRect backFrame = self.emojiLabel.frame;
     backFrame.origin.x -= 18;

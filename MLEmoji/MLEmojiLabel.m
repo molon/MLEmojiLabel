@@ -433,6 +433,13 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     
 }
 
+#pragma mark - size fit result
+- (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth
+{
+    CGSize size = [MLEmojiLabel sizeThatFitsAttributedString:self.attributedText withConstraints:CGSizeMake(maxWidth, CGFLOAT_MAX) limitedToNumberOfLines:self.numberOfLines];
+    return size;
+}
+
 #pragma mark - setter
 - (void)setIsNeedAtAndPoundSign:(BOOL)isNeedAtAndPoundSign
 {
@@ -506,6 +513,11 @@ didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
     }
 }
 
+#pragma mark - UIResponderStandardEditActions
+
+- (void)copy:(__unused id)sender {
+    [[UIPasteboard generalPasteboard] setString:self.emojiText];
+}
 
 #pragma mark - other
 //为了生成plist方便的一个方法罢了
@@ -516,12 +528,12 @@ didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
     NSMutableDictionary *testDict = [NSMutableDictionary dictionary];
     [kSlashEmojiRegularExpression() enumerateMatchesInString:testString options:0 range:NSMakeRange(0, testString.length) usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL *stop) {
         [testArray addObject:[testString substringWithRange:result.range]];
-        [testDict setObject:[NSString stringWithFormat:@"Expression_%lu",testArray.count] forKey:[testString substringWithRange:result.range]];
+        [testDict setObject:[NSString stringWithFormat:@"Expression_%u",testArray.count] forKey:[testString substringWithRange:result.range]];
     }];
     
     NSString *documentDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *doc = [NSString stringWithFormat:@"%@/expression.plist",documentDir];
-    NSLog(@"%@,length:%lu",doc,testArray.count);
+    NSLog(@"%@,length:%u",doc,testArray.count);
     if ([testArray writeToFile:doc atomically:YES]) {
         NSLog(@"归档expression.plist成功");
     }
