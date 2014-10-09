@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BA5760AA-394C-4D4B-B750-0124528DE61E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MLEmojiLabel</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F5748825A0C3BE801364D9A4B7FFFEAFBF285CA8</key>
+		<string>https://github.com/MacPu/MLEmojiLabel.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MLEmojiLabel.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F5748825A0C3BE801364D9A4B7FFFEAFBF285CA8</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/MacPu/MLEmojiLabel.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F5748825A0C3BE801364D9A4B7FFFEAFBF285CA8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F5748825A0C3BE801364D9A4B7FFFEAFBF285CA8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MLEmojiLabel</string>
+		</dict>
+	</array>
+</dict>
+</plist>
