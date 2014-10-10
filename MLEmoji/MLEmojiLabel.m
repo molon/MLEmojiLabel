@@ -271,7 +271,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 /**
  *  返回经过表情识别处理的Attributed字符串
  */
-- (NSMutableAttributedString*)mutableAttributeStringWithEmojiText:(NSString*)emojiText
+- (NSMutableAttributedString*)mutableAttributeStringWithEmojiText:(NSAttributedString *)emojiText
 {
     //获取所有表情的位置
 //    NSArray *emojis = [kEmojiRegularExpression() matchesInString:emojiText
@@ -282,11 +282,11 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     
     if (self.customEmojiRegularExpression) {
         //自定义表情正则
-        emojis = [self.customEmojiRegularExpression matchesInString:emojiText
+        emojis = [self.customEmojiRegularExpression matchesInString:emojiText.string
                         options:NSMatchingWithTransparentBounds
                         range:NSMakeRange(0, [emojiText length])];
     }else{
-        emojis = [kSlashEmojiRegularExpression() matchesInString:emojiText
+        emojis = [kSlashEmojiRegularExpression() matchesInString:emojiText.string
                                                 options:NSMatchingWithTransparentBounds
                                                   range:NSMakeRange(0, [emojiText length])];
     }
@@ -298,13 +298,12 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     CGFloat emojiWith = self.font.lineHeight*kEmojiWidthRatioWithLineHeight;
     for (NSTextCheckingResult *result in emojis) {
         NSRange range = result.range;
-		NSString *subStr = [emojiText substringWithRange:NSMakeRange(location, range.location - location)];
-		NSMutableAttributedString *attSubStr = [[NSMutableAttributedString alloc] initWithString:subStr];
+        NSAttributedString *attSubStr = [emojiText attributedSubstringFromRange:NSMakeRange(location, range.location - location)];
 		[attrStr appendAttributedString:attSubStr];
         
 		location = range.location + range.length;
         
-		NSString *emojiKey = [emojiText substringWithRange:range];
+		NSString *emojiKey = [emojiText.string substringWithRange:range];
         
         
         NSDictionary *emojiDict = self.customEmojiRegularExpression?self.customEmojiDictionary:[MLEmojiLabel emojiDictionary];
@@ -368,18 +367,19 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     }
     if (location < [emojiText length]) {
         NSRange range = NSMakeRange(location, [emojiText length] - location);
-        NSString *subStr = [emojiText substringWithRange:range];
-        NSMutableAttributedString *attrSubStr = [[NSMutableAttributedString alloc] initWithString:subStr];
+        NSAttributedString *attrSubStr = [emojiText attributedSubstringFromRange:range];
         [attrStr appendAttributedString:attrSubStr];
     }
     return attrStr;
 }
 
 
-- (void)setEmojiText:(NSString*)emojiText
+- (void)setText:(id)text
 {
-    _emojiText = emojiText;
-    if (!emojiText||emojiText.length<=0) {
+    NSParameterAssert(!text || [text isKindOfClass:[NSAttributedString class]] || [text isKindOfClass:[NSString class]]);
+    
+    
+    if (!text) {
         [super setText:nil];
         return;
     }
@@ -387,12 +387,15 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     NSMutableAttributedString *mutableAttributedString = nil;
     
     if (self.disableEmoji) {
-        mutableAttributedString = [[NSMutableAttributedString alloc]initWithString:emojiText];
+        mutableAttributedString = [[NSMutableAttributedString alloc]initWithString:text];
     }else{
-        mutableAttributedString = [self mutableAttributeStringWithEmojiText:emojiText];
+        if([text isKindOfClass:[NSString class]])
+            mutableAttributedString = [self mutableAttributeStringWithEmojiText:[[NSAttributedString alloc] initWithString:text]];
+        else
+            mutableAttributedString = [self mutableAttributeStringWithEmojiText:text];
     }
     
-    [self setText:mutableAttributedString afterInheritingLabelAttributesAndConfiguringWithBlock:nil];
+    [super setText:mutableAttributedString];
     
     NSRange stringRange = NSMakeRange(0, mutableAttributedString.length);
     
@@ -444,25 +447,25 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 - (void)setIsNeedAtAndPoundSign:(BOOL)isNeedAtAndPoundSign
 {
     _isNeedAtAndPoundSign = isNeedAtAndPoundSign;
-    self.emojiText = self.emojiText; //简单重新绘制处理下
+    self.text = self.text; //简单重新绘制处理下
 }
 
 - (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode
 {
     [super setLineBreakMode:lineBreakMode];
-    self.emojiText = self.emojiText; //简单重新绘制处理下
+    self.text = self.text; //简单重新绘制处理下
 }
 
 - (void)setDisableEmoji:(BOOL)disableEmoji
 {
     _disableEmoji = disableEmoji;
-    self.emojiText = self.emojiText; //简单重新绘制处理下
+    self.text = self.text; //简单重新绘制处理下
 }
 
 - (void)setDisableThreeCommon:(BOOL)disableThreeCommon
 {
     _disableThreeCommon = disableThreeCommon;
-    self.emojiText = self.emojiText; //简单重新绘制处理下
+    self.text = self.text; //简单重新绘制处理下
 }
 
 - (void)setCustomEmojiRegex:(NSString *)customEmojiRegex
@@ -475,7 +478,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         self.customEmojiRegularExpression = nil;
     }
     
-    self.emojiText = self.emojiText; //简单重新绘制处理下
+    self.text = self.text; //简单重新绘制处理下
 }
 
 - (void)setCustomEmojiPlistName:(NSString *)customEmojiPlistName
@@ -492,7 +495,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         self.customEmojiDictionary = nil;
     }
     
-    self.emojiText = self.emojiText; //简单重新绘制处理下
+    self.text = self.text; //简单重新绘制处理下
 }
 
 #pragma mark - delegate
@@ -516,7 +519,7 @@ didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
 #pragma mark - UIResponderStandardEditActions
 
 - (void)copy:(__unused id)sender {
-    [[UIPasteboard generalPasteboard] setString:self.emojiText];
+    [[UIPasteboard generalPasteboard] setString:self.text];
 }
 
 #pragma mark - other
