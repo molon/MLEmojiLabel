@@ -62,6 +62,8 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
 @property (nonatomic, strong) NSRegularExpression *customEmojiRegularExpression;
 @property (nonatomic, strong) NSDictionary *customEmojiDictionary;
 
+@property (nonatomic, copy) NSString *emojiText;
+
 @end
 
 @implementation MLEmojiLabel
@@ -378,21 +380,25 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 {
     NSParameterAssert(!text || [text isKindOfClass:[NSAttributedString class]] || [text isKindOfClass:[NSString class]]);
     
-    
     if (!text) {
+        self.emojiText = nil;
         [super setText:nil];
         return;
     }
+    
+    //记录下原始的留作剪切板使用
+    self.emojiText = [text isKindOfClass:[NSAttributedString class]]?((NSAttributedString*)text).string:text;
     
     NSMutableAttributedString *mutableAttributedString = nil;
     
     if (self.disableEmoji) {
         mutableAttributedString = [[NSMutableAttributedString alloc]initWithString:text];
     }else{
-        if([text isKindOfClass:[NSString class]])
+        if([text isKindOfClass:[NSString class]]){
             mutableAttributedString = [self mutableAttributeStringWithEmojiText:[[NSAttributedString alloc] initWithString:text]];
-        else
+        }else{
             mutableAttributedString = [self mutableAttributeStringWithEmojiText:text];
+        }
     }
     
     [super setText:mutableAttributedString];
@@ -519,7 +525,9 @@ didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
 #pragma mark - UIResponderStandardEditActions
 
 - (void)copy:(__unused id)sender {
-    [[UIPasteboard generalPasteboard] setString:self.text];
+    if (self.emojiText.length>0) {
+        [[UIPasteboard generalPasteboard] setString:self.emojiText];
+    }
 }
 
 #pragma mark - other
