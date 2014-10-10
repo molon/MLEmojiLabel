@@ -57,10 +57,60 @@ NSString *const kCustomGlyphAttributeImageName = @"CustomGlyphAttributeImageName
 #define kURLActionCount 5
 NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@"poundSign->"};
 
+/**
+ *  搞个管理器，否则自定义plist的话，每个label都会有个副本很操蛋
+ */
+@interface MLEmojiLabelPlistManager : NSObject
+
+- (NSDictionary*)emojiDictForKey:(NSString*)key;
+
+@property (nonatomic, strong) NSMutableDictionary *records;
+
+@end
+
+@implementation MLEmojiLabelPlistManager
+
++ (instancetype)sharedInstance {
+    static MLEmojiLabelPlistManager *_sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedInstance = [[[self class] alloc]init];
+    });
+    return _sharedInstance;
+}
+
+- (NSMutableDictionary *)records
+{
+	if (!_records) {
+		_records = [NSMutableDictionary new];
+	}
+	return _records;
+}
+
+- (NSDictionary*)emojiDictForKey:(NSString*)key
+{
+    NSAssert(key&&key.length>0, @"emojiDictForKey:参数不得为空");
+    
+    if (self.records[key]) {
+        return self.records[key];
+    }
+    
+   
+    NSString *emojiFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:key];
+    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:emojiFilePath];
+    NSAssert(dict,@"表情字典%@找不到",key);
+    self.records[key] = dict;
+    
+    return self.records[key];
+}
+
+@end
+
+
 @interface MLEmojiLabel()<TTTAttributedLabelDelegate>
 
 @property (nonatomic, strong) NSRegularExpression *customEmojiRegularExpression;
-@property (nonatomic, strong) NSDictionary *customEmojiDictionary;
+@property (nonatomic, weak) NSDictionary *customEmojiDictionary; //这玩意如果有也是在MLEmojiLabelPlistManager单例里面存着
 
 @property (nonatomic, copy) NSString *emojiText;
 
@@ -489,14 +539,14 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 
 - (void)setCustomEmojiPlistName:(NSString *)customEmojiPlistName
 {
+    if (customEmojiPlistName&&customEmojiPlistName.length>0&&![[customEmojiPlistName lowercaseString] hasSuffix:@".plist"]) {
+        customEmojiPlistName = [customEmojiPlistName stringByAppendingString:@".plist"];
+    }
+    
     _customEmojiPlistName = customEmojiPlistName;
     
     if (customEmojiPlistName&&customEmojiPlistName.length>0) {
-        if (![customEmojiPlistName hasSuffix:@".plist"]) {
-            customEmojiPlistName = [customEmojiPlistName stringByAppendingString:@".plist"];
-        }
-        NSString *emojiFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:customEmojiPlistName];
-	    self.customEmojiDictionary = [[NSDictionary alloc] initWithContentsOfFile:emojiFilePath];
+	    self.customEmojiDictionary = [[MLEmojiLabelPlistManager sharedInstance]emojiDictForKey:customEmojiPlistName];
     }else{
         self.customEmojiDictionary = nil;
     }
@@ -523,7 +573,6 @@ didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
 }
 
 #pragma mark - UIResponderStandardEditActions
-
 - (void)copy:(__unused id)sender {
     if (self.emojiText.length>0) {
         [[UIPasteboard generalPasteboard] setString:self.emojiText];
