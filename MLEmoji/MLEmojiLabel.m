@@ -60,18 +60,19 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
 /**
  *  搞个管理器，否则自定义plist的话，每个label都会有个副本很操蛋
  */
-@interface MLEmojiLabelPlistManager : NSObject
+@interface MLEmojiLabelRegexPlistManager : NSObject
 
 - (NSDictionary*)emojiDictForKey:(NSString*)key;
 
-@property (nonatomic, strong) NSMutableDictionary *records;
+@property (nonatomic, strong) NSMutableDictionary *emojiDictRecords;
+@property (nonatomic, strong) NSMutableDictionary *emojiRegularExpressions;
 
 @end
 
-@implementation MLEmojiLabelPlistManager
+@implementation MLEmojiLabelRegexPlistManager
 
 + (instancetype)sharedInstance {
-    static MLEmojiLabelPlistManager *_sharedInstance = nil;
+    static MLEmojiLabelRegexPlistManager *_sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedInstance = [[[self class] alloc]init];
@@ -79,29 +80,55 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
     return _sharedInstance;
 }
 
-- (NSMutableDictionary *)records
+#pragma mark - getter
+- (NSMutableDictionary *)emojiDictRecords
 {
-	if (!_records) {
-		_records = [NSMutableDictionary new];
+	if (!_emojiDictRecords) {
+		_emojiDictRecords = [NSMutableDictionary new];
 	}
-	return _records;
+	return _emojiDictRecords;
 }
 
+- (NSMutableDictionary *)emojiRegularExpressions
+{
+	if (!_emojiRegularExpressions) {
+		_emojiRegularExpressions = [NSMutableDictionary new];
+	}
+	return _emojiRegularExpressions;
+}
+
+#pragma mark - common
 - (NSDictionary*)emojiDictForKey:(NSString*)key
 {
     NSAssert(key&&key.length>0, @"emojiDictForKey:参数不得为空");
     
-    if (self.records[key]) {
-        return self.records[key];
+    if (self.emojiDictRecords[key]) {
+        return self.emojiDictRecords[key];
     }
     
    
     NSString *emojiFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:key];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:emojiFilePath];
     NSAssert(dict,@"表情字典%@找不到",key);
-    self.records[key] = dict;
+    self.emojiDictRecords[key] = dict;
     
-    return self.records[key];
+    return self.emojiDictRecords[key];
+}
+
+- (NSRegularExpression *)regularExpressionForRegex:(NSString*)regex
+{
+    NSAssert(regex&&regex.length>0, @"regularExpressionForKey:参数不得为空");
+    
+    if (self.emojiRegularExpressions[regex]) {
+        return self.emojiRegularExpressions[regex];
+    }
+    
+    NSRegularExpression *re = [[NSRegularExpression alloc] initWithPattern:regex options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    NSAssert(re,@"正则%@有误",regex);
+    self.emojiDictRecords[regex] = re;
+    
+    return self.emojiDictRecords[regex];
 }
 
 @end
@@ -112,7 +139,8 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
 @property (nonatomic, strong) NSRegularExpression *customEmojiRegularExpression;
 @property (nonatomic, weak) NSDictionary *customEmojiDictionary; //这玩意如果有也是在MLEmojiLabelPlistManager单例里面存着
 
-@property (nonatomic, copy) NSString *emojiText;
+//留个初始副本
+@property (nonatomic, copy) id emojiText;
 
 @end
 
@@ -436,8 +464,8 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         return;
     }
     
-    //记录下原始的留作剪切板使用
-    self.emojiText = [text isKindOfClass:[NSAttributedString class]]?((NSAttributedString*)text).string:text;
+    //记录下原始的留作备份使用
+    self.emojiText = text;
     
     NSMutableAttributedString *mutableAttributedString = nil;
     
@@ -503,25 +531,25 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 - (void)setIsNeedAtAndPoundSign:(BOOL)isNeedAtAndPoundSign
 {
     _isNeedAtAndPoundSign = isNeedAtAndPoundSign;
-    self.text = self.text; //简单重新绘制处理下
+    self.text = self.emojiText; //简单重新绘制处理下
 }
 
 - (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode
 {
     [super setLineBreakMode:lineBreakMode];
-    self.text = self.text; //简单重新绘制处理下
+    self.text = self.emojiText; //简单重新绘制处理下
 }
 
 - (void)setDisableEmoji:(BOOL)disableEmoji
 {
     _disableEmoji = disableEmoji;
-    self.text = self.text; //简单重新绘制处理下
+    self.text = self.emojiText; //简单重新绘制处理下
 }
 
 - (void)setDisableThreeCommon:(BOOL)disableThreeCommon
 {
     _disableThreeCommon = disableThreeCommon;
-    self.text = self.text; //简单重新绘制处理下
+    self.text = self.emojiText; //简单重新绘制处理下
 }
 
 - (void)setCustomEmojiRegex:(NSString *)customEmojiRegex
@@ -529,12 +557,12 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     _customEmojiRegex = customEmojiRegex;
     
     if (customEmojiRegex&&customEmojiRegex.length>0) {
-        self.customEmojiRegularExpression = [[NSRegularExpression alloc] initWithPattern:customEmojiRegex options:NSRegularExpressionCaseInsensitive error:nil];
+        self.customEmojiRegularExpression = [[MLEmojiLabelRegexPlistManager sharedInstance]regularExpressionForRegex:customEmojiRegex];
     }else{
         self.customEmojiRegularExpression = nil;
     }
     
-    self.text = self.text; //简单重新绘制处理下
+    self.text = self.emojiText; //简单重新绘制处理下
 }
 
 - (void)setCustomEmojiPlistName:(NSString *)customEmojiPlistName
@@ -546,12 +574,12 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     _customEmojiPlistName = customEmojiPlistName;
     
     if (customEmojiPlistName&&customEmojiPlistName.length>0) {
-	    self.customEmojiDictionary = [[MLEmojiLabelPlistManager sharedInstance]emojiDictForKey:customEmojiPlistName];
+	    self.customEmojiDictionary = [[MLEmojiLabelRegexPlistManager sharedInstance]emojiDictForKey:customEmojiPlistName];
     }else{
         self.customEmojiDictionary = nil;
     }
     
-    self.text = self.text; //简单重新绘制处理下
+    self.text = self.emojiText; //简单重新绘制处理下
 }
 
 #pragma mark - delegate
@@ -574,8 +602,14 @@ didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
 
 #pragma mark - UIResponderStandardEditActions
 - (void)copy:(__unused id)sender {
-    if (self.emojiText.length>0) {
-        [[UIPasteboard generalPasteboard] setString:self.emojiText];
+    if (!self.emojiText) {
+        return;
+    }
+    
+    NSString *text = [self.emojiText isKindOfClass:[NSAttributedString class]]?((NSAttributedString*)self.emojiText).string:self.emojiText;
+    
+    if (text.length>0) {
+        [[UIPasteboard generalPasteboard] setString:text];
     }
 }
 
