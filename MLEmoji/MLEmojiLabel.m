@@ -136,7 +136,7 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
 
 @interface MLEmojiLabel()<TTTAttributedLabelDelegate>
 
-@property (nonatomic, strong) NSRegularExpression *customEmojiRegularExpression;
+@property (nonatomic, weak) NSRegularExpression *customEmojiRegularExpression;
 @property (nonatomic, weak) NSDictionary *customEmojiDictionary; //这玩意如果有也是在MLEmojiLabelPlistManager单例里面存着
 
 //留个初始副本
