@@ -479,6 +479,9 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         }
     }
     
+    //设置下默认字体
+    [mutableAttributedString addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, mutableAttributedString.string.length)];
+    
     [super setText:mutableAttributedString];
     
     NSRange stringRange = NSMakeRange(0, mutableAttributedString.length);
@@ -579,6 +582,12 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         self.customEmojiDictionary = nil;
     }
     
+    self.text = self.emojiText; //简单重新绘制处理下
+}
+
+- (void)setFont:(UIFont *)font
+{
+    [super setFont:font];
     self.text = self.emojiText; //简单重新绘制处理下
 }
 
