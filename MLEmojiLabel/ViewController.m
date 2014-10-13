@@ -41,8 +41,6 @@
     //        [self.view addSubview:self.label];
     //        self.label.frame = CGRectMake(50, 250, 250, 100);
     //        [self.label sizeToFit];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,7 +54,7 @@
 	if (!_emojiLabel) {
         _emojiLabel = [[MLEmojiLabel alloc]init];
         _emojiLabel.numberOfLines = 0;
-        _emojiLabel.font = [UIFont systemFontOfSize:14.0f];
+        _emojiLabel.font = [UIFont systemFontOfSize:16.0f];
         _emojiLabel.emojiDelegate = self;
         //        _emojiLabel.textAlignment = NSTextAlignmentCenter;
         _emojiLabel.backgroundColor = [UIColor clearColor];
@@ -66,16 +64,8 @@
         //        _emojiLabel.disableThreeCommon = YES;
         //        _emojiLabel.disableEmoji = YES;
         
-        NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@"撒萨撒旦撒旦撒达说https://github.com/molon/MLEmojiLabel阿苏打@撒旦 哈哈哈哈#撒asd#撒旦撒电话18120136012邮箱18120136012@qq.com旦旦/:dsad旦/::)sss/::~啊是大三的拉了/::B/::|/:8-)/::</::$/::X/::Z/::'(/::-|/::@/::P/::D/::O/::(/::+/:--b/::Q/::T/:,@P/:,@-D/::d/:,@o/::g/:|-)/::!/::L/::>/::,@/:,@f/::-S/:?/:,@x/:,@@/::8/:,@!/:!!!/:xx/:bye/:wipe/:dig/:handclap/:&-(/:B-)/:<@/:@>/::-O/:>-|/:P-(/::'|/:X-)/::*/:@x/:8*/:pd/:<W>/:beer/:basketb/:oo/:coffee/:eat/:pig/:rose/:fade/:showlovesssff/:heart/:break/:cake/:li/:bome/:kn/:footb/:ladybug/:shit/:moon/:sun/:gift/:hug/:strong/:weak/:share/:v/:@)/:jj/:@@/:bad/:lvu/:no/:ok/:love/:<L>/:jump/:shake/:<O>/:circle/:kotow/:turn/:skip/:oY链接:http://baidu.com dudl@qq.com"];
+        _emojiLabel.text = @"撒萨撒旦撒旦撒达说https://github.com/molon/MLEmojiLabel阿苏打@撒旦 哈哈哈哈#撒asd#撒旦撒电话18120136012邮箱18120136012@qq.com旦旦/:dsad旦/::)sss/::~啊是大三的拉了/::B/::|/:8-)/::</::$/::X/::Z/::'(/::-|/::@/::P/::D/::O/::(/::+/:--b/::Q/::T/:,@P/:,@-D/::d/:,@o/::g/:|-)/::!/::L/::>/::,@/:,@f/::-S/:?/:,@x/:,@@/::8/:,@!/:!!!/:xx/:bye/:wipe/:dig/:handclap/:&-(/:B-)/:<@/:@>/::-O/:>-|/:P-(/::'|/:X-)/::*/:@x/:8*/:pd/:<W>/:beer/:basketb/:oo/:coffee/:eat/:pig/:rose/:fade/:showlovesssff/:heart/:break/:cake/:li/:bome/:kn/:footb/:ladybug/:shit/:moon/:sun/:gift/:hug/:strong/:weak/:share/:v/:@)/:jj/:@@/:bad/:lvu/:no/:ok/:love/:<L>/:jump/:shake/:<O>/:circle/:kotow/:turn/:skip/:oY链接:http://baidu.com dudl@qq.com";
         
-        NSRange range = [attString.string rangeOfString:@"啊是大三的拉了/"];
-        
-        [attString addAttribute:NSForegroundColorAttributeName
-                          value:[UIColor redColor]
-                          range:range];
-        
-        [_emojiLabel setText:attString];
-//        _emojiLabel.font = [UIFont systemFontOfSize:19.0f];
         
         //这句测试剪切板
         [_emojiLabel performSelector:@selector(copy:) withObject:nil afterDelay:0.01f];

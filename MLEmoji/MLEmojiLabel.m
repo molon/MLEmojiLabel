@@ -139,6 +139,8 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
 @property (nonatomic, weak) NSRegularExpression *customEmojiRegularExpression;
 @property (nonatomic, weak) NSDictionary *customEmojiDictionary; //这玩意如果有也是在MLEmojiLabelPlistManager单例里面存着
 
+@property (nonatomic, assign) BOOL ignoreSetText;
+
 //留个初始副本
 @property (nonatomic, copy) id emojiText;
 
@@ -458,6 +460,11 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 {
     NSParameterAssert(!text || [text isKindOfClass:[NSAttributedString class]] || [text isKindOfClass:[NSString class]]);
     
+    if (self.ignoreSetText) {
+        [super setText:text];
+        return;
+    }
+    
     if (!text) {
         self.emojiText = nil;
         [super setText:nil];
@@ -470,19 +477,23 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     NSMutableAttributedString *mutableAttributedString = nil;
     
     if (self.disableEmoji) {
-        mutableAttributedString = [[NSMutableAttributedString alloc]initWithString:text];
+        mutableAttributedString = [text isKindOfClass:[NSAttributedString class]]?[text mutableCopy]:[[NSMutableAttributedString alloc]initWithString:text];
+        //直接设置text即可,这里text可能为attrString，也可能为String
+        [super setText:text];
     }else{
+        //如果是String，必须通过setText:afterInheritingLabelAttributesAndConfiguringWithBlock:来添加一些默认属性，例如字体颜色。这是TTT的做法，不可避免
         if([text isKindOfClass:[NSString class]]){
             mutableAttributedString = [self mutableAttributeStringWithEmojiText:[[NSAttributedString alloc] initWithString:text]];
+            //这里面会调用 self setText:，所以需要做个标记避免下无限循环
+            self.ignoreSetText = YES;
+            [super setText:mutableAttributedString afterInheritingLabelAttributesAndConfiguringWithBlock:nil];
+            self.ignoreSetText = NO;
         }else{
             mutableAttributedString = [self mutableAttributeStringWithEmojiText:text];
+            //这里虽然会调用
+            [super setText:mutableAttributedString];
         }
     }
-    
-    //设置下默认字体
-    [mutableAttributedString addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, mutableAttributedString.string.length)];
-    
-    [super setText:mutableAttributedString];
     
     NSRange stringRange = NSMakeRange(0, mutableAttributedString.length);
     
@@ -496,7 +507,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
             continue;
         }
         NSString *urlAction = kURLActions[i];
-        [regexps[i] enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL *stop) {
+        [regexps[i] enumerateMatchesInString:mutableAttributedString.string options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL *stop) {
             
             //检查是否和之前记录的有交集，有的话则忽略
             for (NSTextCheckingResult *record in results){
