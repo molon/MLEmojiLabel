@@ -29,7 +29,7 @@
     [self.view addSubview:self.textBackImageView];
     [self.view addSubview:self.emojiLabel];
     CGSize size = [self.emojiLabel preferredSizeWithMaxWidth:250.0f];
-    self.emojiLabel.frame = CGRectMake(30, 100, size.width, size.height);
+    self.emojiLabel.frame = CGRectMake(30, 100, 250.0f, size.height);
     
     CGRect backFrame = self.emojiLabel.frame;
     backFrame.origin.x -= 18;
@@ -38,9 +38,9 @@
     backFrame.size.height += 13+13+7;
     self.textBackImageView.frame = backFrame;
     
-    //        [self.view addSubview:self.label];
-    //        self.label.frame = CGRectMake(50, 250, 250, 100);
-    //        [self.label sizeToFit];
+//            [self.view addSubview:self.label];
+//            self.label.frame = CGRectMake(20, 250, 250, 100);
+//            [self.label sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,13 +58,13 @@
         _emojiLabel.emojiDelegate = self;
         //        _emojiLabel.textAlignment = NSTextAlignmentCenter;
         _emojiLabel.backgroundColor = [UIColor clearColor];
-        _emojiLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _emojiLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _emojiLabel.isNeedAtAndPoundSign = YES;
-        
+        _emojiLabel.numberOfLines = 1;
         //        _emojiLabel.disableThreeCommon = YES;
         //        _emojiLabel.disableEmoji = YES;
         
-        _emojiLabel.text = @"撒萨撒旦撒旦撒达说https://github.com/molon/MLEmojiLabel阿苏打@撒旦 哈哈哈哈#撒asd#撒旦撒电话18120136012邮箱18120136012@qq.com旦旦/:dsad旦/::)sss/::~啊是大三的拉了/::B/::|/:8-)/::</::$/::X/::Z/::'(/::-|/::@/::P/::D/::O/::(/::+/:--b/::Q/::T/:,@P/:,@-D/::d/:,@o/::g/:|-)/::!/::L/::>/::,@/:,@f/::-S/:?/:,@x/:,@@/::8/:,@!/:!!!/:xx/:bye/:wipe/:dig/:handclap/:&-(/:B-)/:<@/:@>/::-O/:>-|/:P-(/::'|/:X-)/::*/:@x/:8*/:pd/:<W>/:beer/:basketb/:oo/:coffee/:eat/:pig/:rose/:fade/:showlovesssff/:heart/:break/:cake/:li/:bome/:kn/:footb/:ladybug/:shit/:moon/:sun/:gift/:hug/:strong/:weak/:share/:v/:@)/:jj/:@@/:bad/:lvu/:no/:ok/:love/:<L>/:jump/:shake/:<O>/:circle/:kotow/:turn/:skip/:oY链接:http://baidu.com dudl@qq.com";
+        _emojiLabel.text = @"/:8-)/::</::$/::X/::Z/::'(/::-|/::@/::P/::D/::O/::(/::+/:--b/::Q/::T/:,@P/:,@-D/::d/:,@o/::g/:|-)/::!/::L/::>/::,@/:,@f/::-S/:?/:,@x/:,@@/::8/:,@!/:!!!/:xx/:bye/:wipe/:dig/:handclap/:&-(/:B-)/:<@/:@>/::-O/:>-|/:P-(/::'|/:X-)/::*/:@x/:8*/:pd/:<W>/:beer/:basketb/:oo/:coffee/:eat/:pig/:rose/:fade/:showlovesssff/:heart/:break/:cake/:li/:bome/:kn/:footb/:ladybug/:shit/:moon/:sun/:gift/:hug/:strong/:weak/:share/:v/:@)/:jj/:@@/:bad/:lvu/:no/:ok/:love/:<L>/:jump/:shake/:<O>/:circle/:kotow/:turn/:skip/:oY链接:http://baidu.com dudl@qq.com";
         
         
         //这句测试剪切板
@@ -93,16 +93,16 @@
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor blackColor];
         label.font = [UIFont systemFontOfSize:14.0f];
-        label.lineBreakMode = NSLineBreakByCharWrapping;
+        label.lineBreakMode = NSLineBreakByTruncatingTail;
         label.numberOfLines = 0;
         label.text = @"链接:http://baidu.com电话18120136012邮箱dudl@qq.com@某某某 ,###哈哈哈### ,[大笑] 啊是大三的@阿萨德.com";
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:label.text ];
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:5.0];
-        [paragraphStyle setLineBreakMode:NSLineBreakByCharWrapping];
-        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [label.text length])];
-        
-        label.attributedText = attributedString;
+//        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:label.text ];
+//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//        [paragraphStyle setLineSpacing:5.0];
+//        [paragraphStyle setLineBreakMode:label.lineBreakMode];
+//        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [label.text length])];
+//        
+//        label.attributedText = attributedString;
         
         _label = label;
     }

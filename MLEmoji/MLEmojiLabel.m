@@ -47,7 +47,7 @@ REGULAREXPRESSION(SlashEmojiRegularExpression, @"/:[\\x21-\\x2E\\x30-\\x7E]{1,8}
 const CGFloat kLineSpacing = 4.0;
 const CGFloat kAscentDescentScale = 0.25; //在这里的话无意义，高度的结局都是和宽度一样
 
-const CGFloat kEmojiWidthRatioWithLineHeight = 1.25;//和字体高度的比例
+const CGFloat kEmojiWidthRatioWithLineHeight = 1.15;//和字体高度的比例
 
 const CGFloat kEmojiOriginYOffsetRatioWithLineHeight = 0.10; //表情绘制的y坐标矫正值，和字体高度的比例，越大越往下
 NSString *const kCustomGlyphAttributeImageName = @"CustomGlyphAttributeImageName";
@@ -288,34 +288,75 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     
     CGFloat emojiOriginYOffset = self.font.lineHeight*kEmojiOriginYOffsetRatioWithLineHeight;
     
-    //找到行
-    NSArray *lines = (__bridge NSArray *)CTFrameGetLines(frame);
-    //找到每行的origin，保存起来
-    CGPoint origins[[lines count]];
-    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), origins);
-    
     //修正绘制offset，根据当前设置的textAlignment
     CGFloat flushFactor = TTTFlushFactorForTextAlignment(self.textAlignment);
     
-    CFIndex lineIndex = 0;
-    for (id line in lines) {
+    CFArrayRef lines = CTFrameGetLines(frame);
+    NSInteger numberOfLines = self.numberOfLines > 0 ? MIN(self.numberOfLines, CFArrayGetCount(lines)) : CFArrayGetCount(lines);
+    CGPoint lineOrigins[numberOfLines];
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, numberOfLines), lineOrigins);
+    
+    BOOL truncateLastLine = (self.lineBreakMode == NSLineBreakByTruncatingHead || self.lineBreakMode == NSLineBreakByTruncatingMiddle || self.lineBreakMode == NSLineBreakByTruncatingTail);
+    CFRange textRange = CFRangeMake(0, (CFIndex)[self.attributedText length]);
+    
+    for (CFIndex lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+        CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
+        
         //获取当前行的宽度和高度，并且设置对应的origin进去，就获得了这行的bounds
         CGFloat ascent = 0.0f, descent = 0.0f, leading = 0.0f;
-        CGFloat width = (CGFloat)CTLineGetTypographicBounds((__bridge CTLineRef)line, &ascent, &descent, &leading) ;
+        CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading) ;
         CGRect lineBounds = CGRectMake(0.0f, 0.0f, width, ascent + descent + leading) ;
-        lineBounds.origin.x = origins[lineIndex].x;
-        lineBounds.origin.y = origins[lineIndex].y;
+        lineBounds.origin.x = lineOrigins[lineIndex].x;
+        lineBounds.origin.y = lineOrigins[lineIndex].y;
         
         //这里其实是能获取到当前行的真实origin.x，根据textAlignment，而lineBounds.origin.x其实是默认一直为0的(不会受textAlignment影响)
-        CGFloat penOffset = (CGFloat)CTLineGetPenOffsetForFlush((__bridge CTLineRef)line, flushFactor, rect.size.width);
+        CGFloat penOffset = (CGFloat)CTLineGetPenOffsetForFlush(line, flushFactor, rect.size.width);
+        
+        CFIndex truncationAttributePosition = -1;
+        //检测如果是最后一行，是否有替换...
+        if (lineIndex == numberOfLines - 1 && truncateLastLine) {
+            // Check if the range of text in the last line reaches the end of the full attributed string
+            CFRange lastLineRange = CTLineGetStringRange(line);
+            
+            if (!(lastLineRange.length == 0 && lastLineRange.location == 0) && lastLineRange.location + lastLineRange.length < textRange.location + textRange.length) {
+                // Get correct truncationType and attribute position
+                truncationAttributePosition = lastLineRange.location;
+                NSLineBreakMode lineBreakMode = self.lineBreakMode;
+                
+                // Multiple lines, only use UILineBreakModeTailTruncation
+                if (numberOfLines != 1) {
+                    lineBreakMode = NSLineBreakByTruncatingTail;
+                }
+                
+                switch (lineBreakMode) {
+                    case NSLineBreakByTruncatingHead:
+                        break;
+                    case NSLineBreakByTruncatingMiddle:
+                        truncationAttributePosition += (lastLineRange.length / 2);
+                        break;
+                    case NSLineBreakByTruncatingTail:
+                    default:
+                        truncationAttributePosition += (lastLineRange.length - 1);
+                        break;
+                }
+                
+                //如果要在truncationAttributePosition这个位置画表情需要忽略
+            }
+        }
         
         //找到当前行的每一个要素，姑且这么叫吧。可以理解为有单独的attr属性的各个range。
-        for (id glyphRun in (__bridge NSArray *)CTLineGetGlyphRuns((__bridge CTLineRef)line)) {
+        for (id glyphRun in (__bridge NSArray *)CTLineGetGlyphRuns(line)) {
             //找到此要素所对应的属性
             NSDictionary *attributes = (__bridge NSDictionary *)CTRunGetAttributes((__bridge CTRunRef) glyphRun);
             //判断是否有图像，如果有就绘制上去
             NSString *imageName = attributes[kCustomGlyphAttributeImageName];
             if (imageName) {
+                CFRange glyphRange = CTRunGetStringRange((__bridge CTRunRef)glyphRun);
+                if (glyphRange.location == truncationAttributePosition) {
+                    //这里因为glyphRange的length肯定为1，所以只做这一个判断足够
+                    continue;
+                }
+                
                 CGRect runBounds = CGRectZero;
                 CGFloat runAscent = 0.0f;
                 CGFloat runDescent = 0.0f;
@@ -324,17 +365,16 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
                 runBounds.size.height = runAscent + runDescent;
                 
                 CGFloat xOffset = 0.0f;
-                CFRange glyphRange = CTRunGetStringRange((__bridge CTRunRef)glyphRun);
                 switch (CTRunGetStatus((__bridge CTRunRef)glyphRun)) {
                     case kCTRunStatusRightToLeft:
-                        xOffset = CTLineGetOffsetForStringIndex((__bridge CTLineRef)line, glyphRange.location + glyphRange.length, NULL);
+                        xOffset = CTLineGetOffsetForStringIndex(line, glyphRange.location + glyphRange.length, NULL);
                         break;
                     default:
-                        xOffset = CTLineGetOffsetForStringIndex((__bridge CTLineRef)line, glyphRange.location, NULL);
+                        xOffset = CTLineGetOffsetForStringIndex(line, glyphRange.location, NULL);
                         break;
                 }
                 runBounds.origin.x = penOffset + xOffset;
-                runBounds.origin.y = origins[lineIndex].y;
+                runBounds.origin.y = lineOrigins[lineIndex].y;
                 runBounds.origin.y -= runDescent;
                 
                 UIImage *image = [UIImage imageNamed:imageName];
@@ -342,8 +382,6 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
                 CGContextDrawImage(c, runBounds, image.CGImage);
             }
         }
-        
-        lineIndex++;
     }
     
 }

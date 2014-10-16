@@ -175,11 +175,11 @@ static inline NSDictionary * NSAttributedStringAttributesFromLabel(TTTAttributed
         paragraphStyle.firstLineHeadIndent = label.firstLineIndent;
         paragraphStyle.headIndent = paragraphStyle.firstLineHeadIndent;
 
-//        if (label.numberOfLines == 1) {
+        if (label.numberOfLines == 1) {
             paragraphStyle.lineBreakMode = label.lineBreakMode;
-//        } else {
-//            paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-//        }
+        } else {
+            paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+        }
 
         [mutableAttributes setObject:paragraphStyle forKey:(NSString *)kCTParagraphStyleAttributeName];
     } else {
@@ -198,10 +198,10 @@ static inline NSDictionary * NSAttributedStringAttributesFromLabel(TTTAttributed
         CGFloat lineHeightMultiple = label.lineHeightMultiple;
         CGFloat firstLineIndent = label.firstLineIndent;
 
-        CTLineBreakMode lineBreakMode = kCTLineBreakByWordWrapping;
-//        if (label.numberOfLines == 1) {
+        CTLineBreakMode lineBreakMode = CTLineBreakModeFromTTTLineBreakMode(NSLineBreakByCharWrapping);
+        if (label.numberOfLines == 1) {
             lineBreakMode = CTLineBreakModeFromTTTLineBreakMode(label.lineBreakMode);
-//        }
+        }
 
         CTParagraphStyleSetting paragraphStyles[12] = {
             {.spec = kCTParagraphStyleSpecifierAlignment, .valueSize = sizeof(CTTextAlignment), .value = (const void *)&alignment},
@@ -361,7 +361,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
         [mutableInactiveLinkAttributes setObject:[UIColor grayColor] forKey:(NSString *)kCTForegroundColorAttributeName];
 
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
 
         [mutableLinkAttributes setObject:paragraphStyle forKey:(NSString *)kCTParagraphStyleAttributeName];
         [mutableActiveLinkAttributes setObject:paragraphStyle forKey:(NSString *)kCTParagraphStyleAttributeName];
@@ -371,7 +371,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
         [mutableActiveLinkAttributes setObject:(__bridge id)[[UIColor redColor] CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
         [mutableInactiveLinkAttributes setObject:(__bridge id)[[UIColor grayColor] CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
 
-        CTLineBreakMode lineBreakMode = kCTLineBreakByWordWrapping;
+        CTLineBreakMode lineBreakMode = kCTLineBreakByCharWrapping;
         CTParagraphStyleSetting paragraphStyles[1] = {
             {.spec = kCTParagraphStyleSpecifierLineBreakMode, .valueSize = sizeof(CTLineBreakMode), .value = (const void *)&lineBreakMode}
         };
