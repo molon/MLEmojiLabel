@@ -106,7 +106,7 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
         return self.emojiDictRecords[key];
     }
     
-   
+    
     NSString *emojiFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:key];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:emojiFilePath];
     NSAssert(dict,@"表情字典%@找不到",key);
@@ -193,7 +193,7 @@ static CGFloat widthCallback(void *refCon) {
 - (void)commonInit {
     
     //这个是用来生成plist时候用到
-//    [self initPlist];
+    //    [self initPlist];
     
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = NO;
@@ -285,7 +285,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
                          context:(CGContextRef)c
 {
     //PS:这个是在TTT里drawFramesetter....方法最后做了修改的基础上。
-    
+    CGFloat emojiWith = self.font.lineHeight*kEmojiWidthRatioWithLineHeight;
     CGFloat emojiOriginYOffset = self.font.lineHeight*kEmojiOriginYOffsetRatioWithLineHeight;
     
     //修正绘制offset，根据当前设置的textAlignment
@@ -362,6 +362,12 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
                 CGFloat runDescent = 0.0f;
                 
                 runBounds.size.width = (CGFloat)CTRunGetTypographicBounds((__bridge CTRunRef)glyphRun, CFRangeMake(0, 0), &runAscent, &runDescent, NULL);
+                
+                if (runBounds.size.width!=emojiWith) {
+                    //这一句是为了在某些情况下，例如单行省略号模式下，默认行为会将个别表情的runDelegate改变，也就改变了其大小。这时候会引起界面上错乱，这里做下检测(浮点数做等于判断似乎有点操蛋啊。。)
+                    continue;
+                }
+                
                 runBounds.size.height = runAscent + runDescent;
                 
                 CGFloat xOffset = 0.0f;
@@ -394,21 +400,21 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 - (NSMutableAttributedString*)mutableAttributeStringWithEmojiText:(NSAttributedString *)emojiText
 {
     //获取所有表情的位置
-//    NSArray *emojis = [kEmojiRegularExpression() matchesInString:emojiText
-//                                                         options:NSMatchingWithTransparentBounds
-//                                                           range:NSMakeRange(0, [emojiText length])];
-
+    //    NSArray *emojis = [kEmojiRegularExpression() matchesInString:emojiText
+    //                                                         options:NSMatchingWithTransparentBounds
+    //                                                           range:NSMakeRange(0, [emojiText length])];
+    
     NSArray *emojis = nil;
     
     if (self.customEmojiRegularExpression) {
         //自定义表情正则
         emojis = [self.customEmojiRegularExpression matchesInString:emojiText.string
-                        options:NSMatchingWithTransparentBounds
-                        range:NSMakeRange(0, [emojiText length])];
+                                                            options:NSMatchingWithTransparentBounds
+                                                              range:NSMakeRange(0, [emojiText length])];
     }else{
         emojis = [kSlashEmojiRegularExpression() matchesInString:emojiText.string
-                                                options:NSMatchingWithTransparentBounds
-                                                  range:NSMakeRange(0, [emojiText length])];
+                                                         options:NSMatchingWithTransparentBounds
+                                                           range:NSMakeRange(0, [emojiText length])];
     }
     
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] init];
