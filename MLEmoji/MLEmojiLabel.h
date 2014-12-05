@@ -39,6 +39,8 @@ typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
 
 @property (nonatomic, weak) id<MLEmojiLabelDelegate> delegate; //点击连接的代理方法
 
+@property (nonatomic, copy, readonly) id emojiText; //外部能获取text的原始副本
+
 - (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth;
 
 @end
