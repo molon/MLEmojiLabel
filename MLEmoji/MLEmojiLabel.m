@@ -134,7 +134,7 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
 @end
 
 
-@interface MLEmojiLabel()<TTTAttributedLabelDelegate>
+@interface MLEmojiLabel()
 
 @property (nonatomic, weak) NSRegularExpression *customEmojiRegularExpression;
 @property (nonatomic, weak) NSDictionary *customEmojiDictionary; //这玩意如果有也是在MLEmojiLabelPlistManager单例里面存着
@@ -198,7 +198,6 @@ static CGFloat widthCallback(void *refCon) {
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = NO;
     
-    self.delegate = self;
     self.numberOfLines = 0;
     self.font = [UIFont systemFontOfSize:14.0];
     self.textColor = [UIColor blackColor];
@@ -646,22 +645,25 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     self.text = self.emojiText; //简单重新绘制处理下
 }
 
-#pragma mark - delegate
-- (void)attributedLabel:(TTTAttributedLabel *)label
-didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
+#pragma mark - select link override
+//PS:此处是在TTT代码里添加一个供继承的行为
+- (BOOL)didSelectLinkWithTextCheckingResult:(NSTextCheckingResult*)result
 {
     if (result.resultType == NSTextCheckingTypeCorrection) {
         //判断消息类型
         for (NSUInteger i=0; i<kURLActionCount; i++) {
             if ([result.replacementString hasPrefix:kURLActions[i]]) {
                 NSString *content = [result.replacementString substringFromIndex:kURLActions[i].length];
-                if(self.emojiDelegate&&[self.emojiDelegate respondsToSelector:@selector(mlEmojiLabel:didSelectLink:withType:)]){
+                if(self.delegate&&[self.delegate respondsToSelector:@selector(mlEmojiLabel:didSelectLink:withType:)]){
                     //type的数组和i刚好对应
-                    [self.emojiDelegate mlEmojiLabel:self didSelectLink:content withType:i];
+                    [self.delegate mlEmojiLabel:self didSelectLink:content withType:i];
+                    return YES;
                 }
+                return NO;
             }
         }
     }
+    return NO;
 }
 
 #pragma mark - UIResponderStandardEditActions

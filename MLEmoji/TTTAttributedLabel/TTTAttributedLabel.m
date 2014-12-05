@@ -178,7 +178,9 @@ static inline NSDictionary * NSAttributedStringAttributesFromLabel(TTTAttributed
         if (label.numberOfLines == 1) {
             paragraphStyle.lineBreakMode = label.lineBreakMode;
         } else {
+            //MARK: molon修改从word。。修改为NSLineBreakByCharWrapping
             paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+            //MARK..
         }
 
         [mutableAttributes setObject:paragraphStyle forKey:(NSString *)kCTParagraphStyleAttributeName];
@@ -198,7 +200,9 @@ static inline NSDictionary * NSAttributedStringAttributesFromLabel(TTTAttributed
         CGFloat lineHeightMultiple = label.lineHeightMultiple;
         CGFloat firstLineIndent = label.firstLineIndent;
 
+        //MARK: molon修改从word。。修改为NSLineBreakByCharWrapping
         CTLineBreakMode lineBreakMode = CTLineBreakModeFromTTTLineBreakMode(NSLineBreakByCharWrapping);
+        //MARK..
         if (label.numberOfLines == 1) {
             lineBreakMode = CTLineBreakModeFromTTTLineBreakMode(label.lineBreakMode);
         }
@@ -827,19 +831,22 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
 
     [self drawStrike:frame inRect:rect context:c];
     
-    //Molon添加
+    //MARK: molon修改 供继承
     [self drawOtherForEndWithFrame:frame inRect:rect context:c];
-
+    //MARK..
+    
     CFRelease(frame);
     CFRelease(path);
 }
 
+//MARK: molon修改 供继承
 - (void)drawOtherForEndWithFrame:(CTFrameRef)frame
            inRect:(CGRect)rect
           context:(CGContextRef)c
 {
     //这里预留留作重载
 }
+//MARK..
 
 - (void)drawBackground:(CTFrameRef)frame
                 inRect:(CGRect)rect
@@ -1469,6 +1476,12 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
                 break;
         }
 
+        //MARK:molon 修改,需要继承
+        if ([self didSelectLinkWithTextCheckingResult:result]){
+            return;
+        }
+        //..
+        
         // Fallback to `attributedLabel:didSelectLinkWithTextCheckingResult:` if no other delegate method matched.
         if ([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithTextCheckingResult:)]) {
             [self.delegate attributedLabel:self didSelectLinkWithTextCheckingResult:result];
@@ -1477,6 +1490,13 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
         [super touchesEnded:touches withEvent:event];
     }
 }
+
+//MARK:molon 修改,需要继承
+- (BOOL)didSelectLinkWithTextCheckingResult:(NSTextCheckingResult*)result
+{
+    return NO;
+}
+//..
 
 - (void)touchesCancelled:(NSSet *)touches
                withEvent:(UIEvent *)event
