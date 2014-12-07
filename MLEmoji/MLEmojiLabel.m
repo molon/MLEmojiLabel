@@ -580,8 +580,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 #pragma mark - size fit result
 - (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth
 {
-    CGSize size = [MLEmojiLabel sizeThatFitsAttributedString:self.attributedText withConstraints:CGSizeMake(maxWidth, CGFLOAT_MAX) limitedToNumberOfLines:self.numberOfLines];
-    return size;
+    return [self sizeThatFits:CGSizeMake(maxWidth, CGFLOAT_MAX)];
 }
 
 #pragma mark - setter
