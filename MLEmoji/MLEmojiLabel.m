@@ -204,7 +204,7 @@ static CGFloat widthCallback(void *refCon) {
     self.backgroundColor = [UIColor clearColor];
     
     /**
-     *  PS:这里需要注意，TTT里默认把numberOfLines不为1的情况下实际绘制的lineBreakMode是以word方式。
+     *  PS:这里需要注意，TTT里默认把numberOfLines不为1的情况下实际绘制是以NSLineBreakByWordWrapping方式。
      *  而默认UILabel似乎也是这样处理的。我不知道为何。已经做修改。
      */
     self.lineBreakMode = NSLineBreakByCharWrapping;
@@ -300,13 +300,6 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     
     for (CFIndex lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
         CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
-        
-        //获取当前行的宽度和高度，并且设置对应的origin进去，就获得了这行的bounds
-        CGFloat ascent = 0.0f, descent = 0.0f, leading = 0.0f;
-        CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading) ;
-        CGRect lineBounds = CGRectMake(0.0f, 0.0f, width, ascent + descent + leading) ;
-        lineBounds.origin.x = lineOrigins[lineIndex].x;
-        lineBounds.origin.y = lineOrigins[lineIndex].y;
         
         //这里其实是能获取到当前行的真实origin.x，根据textAlignment，而lineBounds.origin.x其实是默认一直为0的(不会受textAlignment影响)
         CGFloat penOffset = (CGFloat)CTLineGetPenOffsetForFlush(line, flushFactor, rect.size.width);
@@ -428,25 +421,24 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         
 		location = range.location + range.length;
         
-		NSString *emojiKey = [emojiText.string substringWithRange:range];
-        
+		NSAttributedString *emojiKey = [emojiText attributedSubstringFromRange:range];
         
         NSDictionary *emojiDict = self.customEmojiRegularExpression?self.customEmojiDictionary:[MLEmojiLabel emojiDictionary];
         
         //如果当前获得key后面有多余的，这个需要记录下
-        NSMutableAttributedString *otherAppendStr = nil;
+        NSAttributedString *otherAppendStr = nil;
         
-		NSString *imageName = emojiDict[emojiKey];
+		NSString *imageName = emojiDict[emojiKey.string];
         if (!self.customEmojiRegularExpression) {
             //微信的表情没有结束符号,所以有可能会发现过长的只有头部才是表情的段，需要循环检测一次。微信最大表情特殊字符是8个长度，检测8次即可
             if (!imageName&&emojiKey.length>2) {
                 NSUInteger maxDetctIndex = emojiKey.length>8+2?8:emojiKey.length-2;
                 //从头开始检测是否有对应的
                 for (NSUInteger i=0; i<maxDetctIndex; i++) {
-                    //                NSLog(@"%@",[emojiKey substringToIndex:3+i]);
-                    imageName = emojiDict[[emojiKey substringToIndex:3+i]];
+                    //                NSLog(@"%@",[emojiKey.string substringToIndex:3+i]);
+                    imageName = emojiDict[[emojiKey.string substringToIndex:3+i]];
                     if (imageName) {
-                        otherAppendStr  = [[NSMutableAttributedString alloc]initWithString:[emojiKey substringFromIndex:3+i]];
+                        otherAppendStr = [emojiKey attributedSubstringFromRange:NSMakeRange(3+i, emojiKey.length-3-i)];
                         break;
                     }
                 }
@@ -486,8 +478,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
                             value:imageName
                             range:__range];
 		} else {
-			NSMutableAttributedString *originalStr = [[NSMutableAttributedString alloc] initWithString:emojiKey];
-			[attrStr appendAttributedString:originalStr];
+			[attrStr appendAttributedString:emojiKey];
 		}
     }
     if (location < [emojiText length]) {
@@ -521,7 +512,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     
     if (self.disableEmoji) {
         mutableAttributedString = [text isKindOfClass:[NSAttributedString class]]?[text mutableCopy]:[[NSMutableAttributedString alloc]initWithString:text];
-        //直接设置text即可,这里text可能为attrString，也可能为String
+        //直接设置text即可,这里text可能为attrString，也可能为String,使用TTT的默认行为
         [super setText:text];
     }else{
         //如果是String，必须通过setText:afterInheritingLabelAttributesAndConfiguringWithBlock:来添加一些默认属性，例如字体颜色。这是TTT的做法，不可避免

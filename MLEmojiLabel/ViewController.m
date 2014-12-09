@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MLEmojiLabel.h"
+#import "EmojiTableViewController.h"
 
 @interface ViewController ()<MLEmojiLabelDelegate>
 
@@ -30,7 +31,7 @@
     [self.view addSubview:self.textBackImageView];
     [self.view addSubview:self.emojiLabel1];
     CGSize size = [self.emojiLabel1 preferredSizeWithMaxWidth:kCommonWidth];
-    self.emojiLabel1.frame = CGRectMake(30, 100, kCommonWidth, size.height);
+    self.emojiLabel1.frame = CGRectMake(30, 64, kCommonWidth, size.height);
     
     CGRect backFrame = self.emojiLabel1.frame;
     backFrame.origin.x -= 18;
@@ -69,10 +70,10 @@
         //        _emojiLabel1.disableThreeCommon = YES;
         //        _emojiLabel1.disableEmoji = YES;
         
-        _emojiLabel1.text = @"自定义链接 github:https://github.com/molon/MLEmojiLabel @撒旦 哈哈哈哈#九歌#九黎电话13612341234邮箱13612341234@qq.com旦旦/:dsad旦/::)sss/::~啊是大三的拉了/::B/::|/:8-)/::</::$/::X/::Z/::'(/::-|/::@/::P/::D/::O/::(/::+/:--b/::Q/::T/:,@P/:,@-D/::d/:,@o/::g/:|-)/::!/::L/::>/::,@/:,@f/::-S/:?/:ok/:love/:<L>/:jump/:shake/:<O>/:circle/:kotow/:turn/:skip/:oY链接:http://baidu.com dudl@qq.com";
+        _emojiLabel1.text = @"/:|-)TableView github:https://github.com/molon/MLEmojiLabel @撒旦 哈哈哈哈#九歌#九黎电话13612341234邮箱13612341234@qq.com旦旦/:dsad旦/::)sss/::~啊是大三的拉了/::B/::|/:8-)/::</::$/::X/::Z/::'(/::-|/::@/::P/::D/::O/::(/::+/:--b/::Q/::T/:,@P/:,@-D/::d/:,@o/::g/:|-)/::!/::L/::>/::,@/:,@f/::-S/:?/:ok/:love/:<L>/:jump/:shake/:<O>/:circle/:kotow/:turn/:skip/:oY链接:http://baidu.com dudl@qq.com";
         
         //测试TTT原生方法
-        [_emojiLabel1 addLinkToURL:[NSURL URLWithString:@"http://sasasadan.com"] withRange:NSMakeRange(0, 5)];
+        [_emojiLabel1 addLinkToURL:[NSURL URLWithString:@"http://sasasadan.com"] withRange:[_emojiLabel1.text rangeOfString:@"TableView"]];
         
         //这句测试剪切板
         [_emojiLabel1 performSelector:@selector(copy:) withObject:nil afterDelay:0.01f];
@@ -188,6 +189,9 @@
    didSelectLinkWithURL:(NSURL *)url
 {
     NSLog(@"点击了某个自添加链接%@",url);
+    
+    EmojiTableViewController *vc = [EmojiTableViewController new];
+    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:YES completion:nil];
 }
 
 @end
