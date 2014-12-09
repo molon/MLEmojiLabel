@@ -9,7 +9,7 @@
 #import "EmojiTableViewCell.h"
 #import "MLEmojiLabel.h"
 
-#define kWidth 220.0f
+#define kWidth 300.0f
 @interface EmojiTableViewCell()<MLEmojiLabelDelegate>
 
 @property (nonatomic, strong) MLEmojiLabel *emojiLabel;
@@ -69,7 +69,7 @@
         
         _emojiLabel.lineSpacing = 3.0f;
         
-        _emojiLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+        _emojiLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
         //        _emojiLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
         //        _emojiLabel.customEmojiPlistName = @"expressionImage_custom.plist";
     }
@@ -82,9 +82,7 @@
 {
     _emojiText = emojiText;
     
-    [self.emojiLabel setText:emojiText afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
-        return mutableAttributedString;
-    }];
+    [self.emojiLabel setText:emojiText];
 }
 
 #pragma mark - height
@@ -101,17 +99,14 @@
         protypeLabel.disableEmoji = NO;
         protypeLabel.lineSpacing = 3.0f;
         
-        protypeLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+        protypeLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
 //        protypeLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
 //        protypeLabel.customEmojiPlistName = @"expressionImage_custom.plist";
     }
     
-    [protypeLabel setText:emojiText afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
-        
-        return mutableAttributedString;
-    }];
+    [protypeLabel setText:emojiText];
     
-    return [protypeLabel preferredSizeWithMaxWidth:kWidth-50].height+5.0f*2;
+    return [protypeLabel preferredSizeWithMaxWidth:kWidth].height+5.0f*2;
 }
 
 #pragma mark - delegate

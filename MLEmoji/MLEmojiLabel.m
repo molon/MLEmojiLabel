@@ -250,6 +250,21 @@ static CGFloat widthCallback(void *refCon) {
     self.inactiveLinkAttributes = [NSDictionary dictionaryWithDictionary:mutableInactiveLinkAttributes];
 }
 
+/**
+ *  如果是有attributedText的情况下，有可能会返回少那么点的，这里矫正下
+ *
+ */
+- (CGSize)sizeThatFits:(CGSize)size {
+    if (!self.attributedText) {
+        return [super sizeThatFits:size];
+    }
+    
+    CGSize rSize = [super sizeThatFits:size];
+    rSize.height +=1;
+    return rSize;
+}
+
+
 //这里是抄TTT里的，因为他不是放在外面的
 static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignment) {
     switch (textAlignment) {
@@ -285,13 +300,6 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     
     for (CFIndex lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
         CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
-        
-        //获取当前行的宽度和高度，并且设置对应的origin进去，就获得了这行的bounds
-        CGFloat ascent = 0.0f, descent = 0.0f, leading = 0.0f;
-        CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading) ;
-        CGRect lineBounds = CGRectMake(0.0f, 0.0f, width, ascent + descent + leading) ;
-        lineBounds.origin.x = lineOrigins[lineIndex].x;
-        lineBounds.origin.y = lineOrigins[lineIndex].y;
         
         //这里其实是能获取到当前行的真实origin.x，根据textAlignment，而lineBounds.origin.x其实是默认一直为0的(不会受textAlignment影响)
         CGFloat penOffset = (CGFloat)CTLineGetPenOffsetForFlush(line, flushFactor, rect.size.width);

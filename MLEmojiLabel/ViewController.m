@@ -70,10 +70,10 @@
         //        _emojiLabel1.disableThreeCommon = YES;
         //        _emojiLabel1.disableEmoji = YES;
         
-        _emojiLabel1.text = @"TableView github:https://github.com/molon/MLEmojiLabel @撒旦 哈哈哈哈#九歌#九黎电话13612341234邮箱13612341234@qq.com旦旦/:dsad旦/::)sss/::~啊是大三的拉了/::B/::|/:8-)/::</::$/::X/::Z/::'(/::-|/::@/::P/::D/::O/::(/::+/:--b/::Q/::T/:,@P/:,@-D/::d/:,@o/::g/:|-)/::!/::L/::>/::,@/:,@f/::-S/:?/:ok/:love/:<L>/:jump/:shake/:<O>/:circle/:kotow/:turn/:skip/:oY链接:http://baidu.com dudl@qq.com";
+        _emojiLabel1.text = @"/:|-)TableView github:https://github.com/molon/MLEmojiLabel @撒旦 哈哈哈哈#九歌#九黎电话13612341234邮箱13612341234@qq.com旦旦/:dsad旦/::)sss/::~啊是大三的拉了/::B/::|/:8-)/::</::$/::X/::Z/::'(/::-|/::@/::P/::D/::O/::(/::+/:--b/::Q/::T/:,@P/:,@-D/::d/:,@o/::g/:|-)/::!/::L/::>/::,@/:,@f/::-S/:?/:ok/:love/:<L>/:jump/:shake/:<O>/:circle/:kotow/:turn/:skip/:oY链接:http://baidu.com dudl@qq.com";
         
         //测试TTT原生方法
-        [_emojiLabel1 addLinkToURL:[NSURL URLWithString:@"http://sasasadan.com"] withRange:NSMakeRange(0, 9)];
+        [_emojiLabel1 addLinkToURL:[NSURL URLWithString:@"http://sasasadan.com"] withRange:[_emojiLabel1.text rangeOfString:@"TableView"]];
         
         //这句测试剪切板
         [_emojiLabel1 performSelector:@selector(copy:) withObject:nil afterDelay:0.01f];
