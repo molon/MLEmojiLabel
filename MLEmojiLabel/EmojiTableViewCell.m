@@ -9,6 +9,7 @@
 #import "EmojiTableViewCell.h"
 #import "MLEmojiLabel.h"
 
+#define kWidth 220.0f
 @interface EmojiTableViewCell()<MLEmojiLabelDelegate>
 
 @property (nonatomic, strong) MLEmojiLabel *emojiLabel;
@@ -40,40 +41,50 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - layout
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.emojiLabel.frame = CGRectMake(10.0f, 5.0f, kWidth, self.contentView.frame.size.height-5.0f*2);
+}
+
+
 #pragma mark - getter
 - (MLEmojiLabel *)emojiLabel
 {
-	if (!_emojiLabel) {
-		_emojiLabel = [MLEmojiLabel new];
-		_emojiLabel.numberOfLines = 0;
-        _emojiLabel.font = [UIFont systemFontOfSize:16.0f];
+    if (!_emojiLabel) {
+        _emojiLabel = [MLEmojiLabel new];
+        _emojiLabel.numberOfLines = 0;
+        _emojiLabel.font = [UIFont systemFontOfSize:14.0f];
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByCharWrapping;
         _emojiLabel.textColor = [UIColor whiteColor];
-        _emojiLabel.backgroundColor = [UIColor colorWithRed:0.242 green:0.840 blue:0.145 alpha:1.000];
+        _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
+        
+        _emojiLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         
         _emojiLabel.isNeedAtAndPoundSign = YES;
         _emojiLabel.disableEmoji = NO;
-//        _emojiLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
-//        _emojiLabel.customEmojiPlistName = @"expressionImage_custom.plist";
-	}
-	return _emojiLabel;
+        
+        _emojiLabel.lineSpacing = 3.0f;
+        
+        _emojiLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+        //        _emojiLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
+        //        _emojiLabel.customEmojiPlistName = @"expressionImage_custom.plist";
+    }
+    return _emojiLabel;
 }
+
 
 #pragma mark - setter
 - (void)setEmojiText:(NSString *)emojiText
 {
     _emojiText = emojiText;
     
-    self.emojiLabel.text = emojiText;
-}
-
-#pragma mark - layout
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    self.emojiLabel.frame = CGRectMake(10.0f, 5.0f, 220.0f, self.frame.size.height-5.0f*2);
+    [self.emojiLabel setText:emojiText afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        return mutableAttributedString;
+    }];
 }
 
 #pragma mark - height
@@ -83,17 +94,24 @@
     if (!protypeLabel) {
         protypeLabel = [MLEmojiLabel new];
         protypeLabel.numberOfLines = 0;
-        protypeLabel.font = [UIFont systemFontOfSize:16.0f];
+        protypeLabel.font = [UIFont systemFontOfSize:14.0f];
         protypeLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        protypeLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         protypeLabel.isNeedAtAndPoundSign = YES;
         protypeLabel.disableEmoji = NO;
+        protypeLabel.lineSpacing = 3.0f;
         
+        protypeLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
 //        protypeLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
 //        protypeLabel.customEmojiPlistName = @"expressionImage_custom.plist";
     }
     
-    protypeLabel.text = emojiText;
-    return [protypeLabel preferredSizeWithMaxWidth:220.0f].height+5.0f*2;
+    [protypeLabel setText:emojiText afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        
+        return mutableAttributedString;
+    }];
+    
+    return [protypeLabel preferredSizeWithMaxWidth:kWidth-50].height+5.0f*2;
 }
 
 #pragma mark - delegate
