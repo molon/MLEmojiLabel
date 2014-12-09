@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		364385B11A369B0E00C220CF /* EmojiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 364385AE1A369B0D00C220CF /* EmojiTableViewCell.m */; };
+		364385B21A369B0E00C220CF /* EmojiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 364385B01A369B0D00C220CF /* EmojiTableViewController.m */; };
 		364A89201929B07200BAFB8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A891F1929B07200BAFB8C /* Foundation.framework */; };
 		364A89221929B07200BAFB8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89211929B07200BAFB8C /* CoreGraphics.framework */; };
 		364A89241929B07200BAFB8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89231929B07200BAFB8C /* UIKit.framework */; };
@@ -149,6 +151,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		364385AD1A369B0D00C220CF /* EmojiTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiTableViewCell.h; sourceTree = "<group>"; };
+		364385AE1A369B0D00C220CF /* EmojiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTableViewCell.m; sourceTree = "<group>"; };
+		364385AF1A369B0D00C220CF /* EmojiTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiTableViewController.h; sourceTree = "<group>"; };
+		364385B01A369B0D00C220CF /* EmojiTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTableViewController.m; sourceTree = "<group>"; };
 		364A891C1929B07200BAFB8C /* MLEmojiLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLEmojiLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		364A891F1929B07200BAFB8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		364A89211929B07200BAFB8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -356,6 +362,10 @@
 				364A89311929B07200BAFB8C /* Main.storyboard */,
 				364A89341929B07200BAFB8C /* ViewController.h */,
 				364A89351929B07200BAFB8C /* ViewController.m */,
+				364385AD1A369B0D00C220CF /* EmojiTableViewCell.h */,
+				364385AE1A369B0D00C220CF /* EmojiTableViewCell.m */,
+				364385AF1A369B0D00C220CF /* EmojiTableViewController.h */,
+				364385B01A369B0D00C220CF /* EmojiTableViewController.m */,
 				364A89371929B07200BAFB8C /* Images.xcassets */,
 				364A89261929B07200BAFB8C /* Supporting Files */,
 			);
@@ -736,9 +746,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				364A89361929B07200BAFB8C /* ViewController.m in Sources */,
+				364385B21A369B0E00C220CF /* EmojiTableViewController.m in Sources */,
 				364A89301929B07200BAFB8C /* AppDelegate.m in Sources */,
 				369EE2DF19AB2BE100A93160 /* MLEmojiLabel.m in Sources */,
 				364A892C1929B07200BAFB8C /* main.m in Sources */,
+				364385B11A369B0E00C220CF /* EmojiTableViewCell.m in Sources */,
 				36C3B71B192B3D7A00B6063D /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

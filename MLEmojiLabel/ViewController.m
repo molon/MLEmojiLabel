@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MLEmojiLabel.h"
+#import "EmojiTableViewController.h"
 
 @interface ViewController ()<MLEmojiLabelDelegate>
 
@@ -30,7 +31,7 @@
     [self.view addSubview:self.textBackImageView];
     [self.view addSubview:self.emojiLabel1];
     CGSize size = [self.emojiLabel1 preferredSizeWithMaxWidth:kCommonWidth];
-    self.emojiLabel1.frame = CGRectMake(30, 100, kCommonWidth, size.height);
+    self.emojiLabel1.frame = CGRectMake(30, 64, kCommonWidth, size.height);
     
     CGRect backFrame = self.emojiLabel1.frame;
     backFrame.origin.x -= 18;
@@ -188,6 +189,9 @@
    didSelectLinkWithURL:(NSURL *)url
 {
     NSLog(@"点击了某个自添加链接%@",url);
+    
+    EmojiTableViewController *vc = [EmojiTableViewController new];
+    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:YES completion:nil];
 }
 
 @end
