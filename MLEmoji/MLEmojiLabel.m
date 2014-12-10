@@ -126,9 +126,9 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
     NSRegularExpression *re = [[NSRegularExpression alloc] initWithPattern:regex options:NSRegularExpressionCaseInsensitive error:nil];
     
     NSAssert(re,@"正则%@有误",regex);
-    self.emojiDictRecords[regex] = re;
+    self.emojiRegularExpressions[regex] = re;
     
-    return self.emojiDictRecords[regex];
+    return self.emojiRegularExpressions[regex];
 }
 
 @end
