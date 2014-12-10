@@ -134,7 +134,7 @@
          */
 #warning 切记以上两点
 #warning 这里注意参数也可以为NSString，然后block里添加需要的Attribute。
-#warning 和本库无关的tips，刚刚发现iOS8下不支持NSForegroundColorAttributeName属性，请使用kCTForegroundColorAttributeName
+#warning tips，刚刚发现在此block里 iOS8下不支持NSForegroundColorAttributeName属性，请使用kCTForegroundColorAttributeName
         [_emojiLabel3 setText:attString afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
             [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:[UIColor colorWithRed:0.313 green:0.479 blue:1.000 alpha:1.000] range:NSMakeRange(0, 4)];
             
