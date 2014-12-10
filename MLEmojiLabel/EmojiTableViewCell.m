@@ -37,7 +37,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -63,8 +63,9 @@
         _emojiLabel.lineSpacing = 3.0f;
         
         _emojiLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
-        //        _emojiLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
-        //        _emojiLabel.customEmojiPlistName = @"expressionImage_custom.plist";
+        
+//        _emojiLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
+//        _emojiLabel.customEmojiPlistName = @"expressionImage_custom.plist";
     }
     return _emojiLabel;
 }
@@ -93,12 +94,13 @@
         protypeLabel.lineSpacing = 3.0f;
         
         protypeLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
+        
 //        protypeLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
 //        protypeLabel.customEmojiPlistName = @"expressionImage_custom.plist";
     }
     
     [protypeLabel setText:emojiText];
-    
+
     return [protypeLabel preferredSizeWithMaxWidth:kWidth].height+5.0f*2;
 }
 
