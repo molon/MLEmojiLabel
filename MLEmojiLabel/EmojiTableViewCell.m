@@ -41,13 +41,6 @@
     // Configure the view for the selected state
 }
 
-#pragma mark - layout
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    self.emojiLabel.frame = CGRectMake(10.0f, 5.0f, kWidth, self.contentView.frame.size.height-5.0f*2);
-}
-
 
 #pragma mark - getter
 - (MLEmojiLabel *)emojiLabel
@@ -58,7 +51,7 @@
         _emojiLabel.font = [UIFont systemFontOfSize:14.0f];
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
-        _emojiLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _emojiLabel.textColor = [UIColor whiteColor];
         _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
         
@@ -93,7 +86,7 @@
         protypeLabel = [MLEmojiLabel new];
         protypeLabel.numberOfLines = 0;
         protypeLabel.font = [UIFont systemFontOfSize:14.0f];
-        protypeLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        protypeLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         protypeLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         protypeLabel.isNeedAtAndPoundSign = YES;
         protypeLabel.disableEmoji = NO;
@@ -107,6 +100,13 @@
     [protypeLabel setText:emojiText];
     
     return [protypeLabel preferredSizeWithMaxWidth:kWidth].height+5.0f*2;
+}
+
+#pragma mark - layout
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.emojiLabel.frame = CGRectMake(10.0f, 5.0f, kWidth, self.contentView.frame.size.height-5.0f*2);
 }
 
 #pragma mark - delegate
