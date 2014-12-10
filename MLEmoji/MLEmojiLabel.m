@@ -571,6 +571,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 #pragma mark - size fit result
 - (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth
 {
+    maxWidth = maxWidth - self.textInsets.left - self.textInsets.right;
     return [self sizeThatFits:CGSizeMake(maxWidth, CGFLOAT_MAX)];
 }
 
