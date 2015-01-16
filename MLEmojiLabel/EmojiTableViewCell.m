@@ -10,7 +10,7 @@
 #import "MLEmojiLabel.h"
 
 #define kWidth 300.0f
-@interface EmojiTableViewCell()<MLEmojiLabelDelegate>
+@interface EmojiTableViewCell()<MLEmojiLabelDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) MLEmojiLabel *emojiLabel;
 
@@ -24,6 +24,11 @@
     if (self) {
         // Initialization code
         [self.contentView addSubview:self.emojiLabel];
+        
+#warning 这里是在父View添加手势后，不影响emojiLabel的链接点击的范例，参考下面的gestureRecognizer:shouldReceiveTouch:方法内实现
+        UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap)];
+        tapG.delegate = self;
+        [self.contentView addGestureRecognizer:tapG];
     }
     return self;
 }
@@ -41,6 +46,16 @@
     // Configure the view for the selected state
 }
 
+- (void)tap
+{
+    NSLog(@"tapped");
+}
+
+#pragma mark - gesture delegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return ![self.emojiLabel containslinkAtPoint:[touch locationInView:self.emojiLabel]];
+}
 
 #pragma mark - getter
 - (MLEmojiLabel *)emojiLabel
