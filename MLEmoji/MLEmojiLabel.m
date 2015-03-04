@@ -187,12 +187,13 @@ static CGFloat widthCallback(void *refCon) {
 
 #pragma mark - 初始化和TTT的一些修正
 /**
+ *  下面这个方法覆盖TTT里的，因为个别设置与其不同
  *  TTT很鸡巴。commonInit是被调用了两回。如果直接init的话，因为init其中会调用initWithFrame
- *  PS.已经在里面把init里的修改掉了
+ *  PS.此问题已经向matt提交issue，他已经修正。
  */
 - (void)commonInit {
     
-    //这个是用来生成plist时候用到
+    //这个是用来生成plist时候用到，为了执行此方法找个地罢了
     //    [self initPlist];
     
     self.userInteractionEnabled = YES;
@@ -203,10 +204,6 @@ static CGFloat widthCallback(void *refCon) {
     self.textColor = [UIColor blackColor];
     self.backgroundColor = [UIColor clearColor];
     
-    /**
-     *  PS:这里需要注意，TTT里默认把numberOfLines不为1的情况下实际绘制是以NSLineBreakByWordWrapping方式。
-     *  而默认UILabel似乎也是这样处理的。我不知道为何。已经做修改。
-     */
     self.lineBreakMode = NSLineBreakByCharWrapping;
     
     self.textInsets = UIEdgeInsetsZero;
