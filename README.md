@@ -1,5 +1,6 @@
 MLEmojiLabel
 ============
+如果App不支持iOS7以下的话，建议使用iOS7新特性TextKit编写的图文链接混排Label->[MLLabel](https://github.com/molon/MLLabel)，仅支持iOS7+
 
 自动识别网址、号码、邮箱、@、#话题#和表情的label。
 可以自定义自己的表情识别正则，和对应的表情图像。(默认是识别微信的表情符号)
