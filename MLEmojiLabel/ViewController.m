@@ -60,7 +60,7 @@
 - (MLEmojiLabel *)emojiLabel1
 {
     if (!_emojiLabel1) {
-        _emojiLabel1 = [[MLEmojiLabel alloc]init];
+        _emojiLabel1 = [MLEmojiLabel new];
         _emojiLabel1.numberOfLines = 0;
         _emojiLabel1.font = [UIFont systemFontOfSize:15.0f];
         _emojiLabel1.delegate = self;
@@ -86,7 +86,7 @@
 - (MLEmojiLabel *)emojiLabel2
 {
     if (!_emojiLabel2) {
-        _emojiLabel2 = [[MLEmojiLabel alloc]init];
+        _emojiLabel2 = [MLEmojiLabel new];
         _emojiLabel2.backgroundColor = [UIColor colorWithWhite:0.809 alpha:1.000];
         _emojiLabel2.numberOfLines = 1;
         
@@ -106,7 +106,7 @@
 - (MLEmojiLabel *)emojiLabel3
 {
     if (!_emojiLabel3) {
-        _emojiLabel3 = [[MLEmojiLabel alloc]init];
+        _emojiLabel3 = [MLEmojiLabel new];
         _emojiLabel3.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
         _emojiLabel3.numberOfLines = 0;
         _emojiLabel3.font = [UIFont systemFontOfSize:14.0f];
