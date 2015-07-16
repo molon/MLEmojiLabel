@@ -133,6 +133,13 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
 
 @end
 
+@interface TTTAttributedLabel(MLEmojiLabel)
+
+- (void)commonInit;
+- (NSArray *)addLinksWithTextCheckingResults:(NSArray *)results
+                                  attributes:(NSDictionary *)attributes;
+
+@end
 
 @interface MLEmojiLabel()
 
@@ -186,18 +193,8 @@ static CGFloat widthCallback(void *refCon) {
 }
 
 #pragma mark - 初始化和TTT的一些修正
-/**
- *  下面这个方法覆盖TTT里的，因为个别设置与其不同
- *  TTT很鸡巴。commonInit是被调用了两回。如果直接init的话，因为init其中会调用initWithFrame
- *  PS.此问题已经向matt提交issue，他已经修正。
- */
 - (void)commonInit {
-    
-    //这个是用来生成plist时候用到，为了执行此方法找个地罢了
-    //    [self initPlist];
-    
-    self.userInteractionEnabled = YES;
-    self.multipleTouchEnabled = NO;
+    [super commonInit];
     
     self.numberOfLines = 0;
     self.font = [UIFont systemFontOfSize:14.0];
@@ -206,20 +203,12 @@ static CGFloat widthCallback(void *refCon) {
     
     self.lineBreakMode = NSLineBreakByCharWrapping;
     
-    self.textInsets = UIEdgeInsetsZero;
-    self.lineHeightMultiple = 1.0f;
     self.lineSpacing = kLineSpacing; //默认行间距
     
-    [self setValue:[NSArray array] forKey:@"links"];
+    //链接默认样式重新设置
+    NSMutableDictionary *mutableLinkAttributes = [@{(NSString *)kCTUnderlineStyleAttributeName:@(NO)}mutableCopy];
     
-    NSMutableDictionary *mutableLinkAttributes = [NSMutableDictionary dictionary];
-    [mutableLinkAttributes setObject:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
-    
-    NSMutableDictionary *mutableActiveLinkAttributes = [NSMutableDictionary dictionary];
-    [mutableActiveLinkAttributes setObject:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
-    
-    NSMutableDictionary *mutableInactiveLinkAttributes = [NSMutableDictionary dictionary];
-    [mutableInactiveLinkAttributes setObject:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
+    NSMutableDictionary *mutableActiveLinkAttributes = [@{(NSString *)kCTUnderlineStyleAttributeName:@(NO)}mutableCopy];
     
     UIColor *commonLinkColor = [UIColor colorWithRed:0.112 green:0.000 blue:0.791 alpha:1.000];
     
@@ -229,22 +218,13 @@ static CGFloat widthCallback(void *refCon) {
     if ([NSMutableParagraphStyle class]) {
         [mutableLinkAttributes setObject:commonLinkColor forKey:(NSString *)kCTForegroundColorAttributeName];
         [mutableActiveLinkAttributes setObject:commonLinkColor forKey:(NSString *)kCTForegroundColorAttributeName];
-        [mutableInactiveLinkAttributes setObject:[UIColor grayColor] forKey:(NSString *)kCTForegroundColorAttributeName];
-        
-        
-        //把原有TTT的NSMutableParagraphStyle设置给去掉了。会影响到整个段落的设置
     } else {
         [mutableLinkAttributes setObject:(__bridge id)[commonLinkColor CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
         [mutableActiveLinkAttributes setObject:(__bridge id)[commonLinkColor CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
-        [mutableInactiveLinkAttributes setObject:(__bridge id)[[UIColor grayColor] CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
-        
-        
-        //把原有TTT的NSMutableParagraphStyle设置给去掉了。会影响到整个段落的设置
     }
     
     self.linkAttributes = [NSDictionary dictionaryWithDictionary:mutableLinkAttributes];
     self.activeLinkAttributes = [NSDictionary dictionaryWithDictionary:mutableActiveLinkAttributes];
-    self.inactiveLinkAttributes = [NSDictionary dictionaryWithDictionary:mutableInactiveLinkAttributes];
 }
 
 /**
@@ -557,12 +537,9 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
             [results addObject:aResult];
         }];
     }
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-    //这里直接调用父类私有方法，好处能内部只会setNeedDisplay一次。一次更新所有添加的链接
-    [super performSelector:@selector(addLinksWithTextCheckingResults:attributes:) withObject:results withObject:self.linkAttributes];
-#pragma clang diagnostic pop
     
+    //这里直接调用父类私有方法，好处能内部只会setNeedDisplay一次。一次更新所有添加的链接
+    [super addLinksWithTextCheckingResults:results attributes:self.linkAttributes];
 }
 
 #pragma mark - size fit result

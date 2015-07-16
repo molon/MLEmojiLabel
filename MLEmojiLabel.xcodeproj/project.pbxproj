@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		364385B11A369B0E00C220CF /* EmojiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 364385AE1A369B0D00C220CF /* EmojiTableViewCell.m */; };
 		364385B21A369B0E00C220CF /* EmojiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 364385B01A369B0D00C220CF /* EmojiTableViewController.m */; };
-		364385B51A36E9F800C220CF /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 364385B41A36E9F800C220CF /* TTTAttributedLabel.m */; };
 		364703701A384D4000597BC3 /* MLEmojiLabel_Common.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3647036E1A384D4000597BC3 /* MLEmojiLabel_Common.jpg */; };
 		364703711A384D4000597BC3 /* MLEmojiLabel_TableView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3647036F1A384D4000597BC3 /* MLEmojiLabel_TableView.jpg */; };
 		364A89201929B07200BAFB8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A891F1929B07200BAFB8C /* Foundation.framework */; };
@@ -26,6 +25,7 @@
 		364A89411929B07200BAFB8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89231929B07200BAFB8C /* UIKit.framework */; };
 		364A89491929B07200BAFB8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 364A89471929B07200BAFB8C /* InfoPlist.strings */; };
 		364A894B1929B07200BAFB8C /* MLEmojiLabelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 364A894A1929B07200BAFB8C /* MLEmojiLabelTests.m */; };
+		365FA09B1B57B7770094D200 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 365FA09A1B57B7770094D200 /* TTTAttributedLabel.m */; };
 		369EBEC61929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369EBEC41929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png */; };
 		369EBEC71929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369EBEC51929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png */; };
 		369EE2DF19AB2BE100A93160 /* MLEmojiLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 369EE2DE19AB2BE100A93160 /* MLEmojiLabel.m */; };
@@ -156,8 +156,6 @@
 		364385AE1A369B0D00C220CF /* EmojiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTableViewCell.m; sourceTree = "<group>"; };
 		364385AF1A369B0D00C220CF /* EmojiTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiTableViewController.h; sourceTree = "<group>"; };
 		364385B01A369B0D00C220CF /* EmojiTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTableViewController.m; sourceTree = "<group>"; };
-		364385B31A36E9F800C220CF /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
-		364385B41A36E9F800C220CF /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		3647036E1A384D4000597BC3 /* MLEmojiLabel_Common.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MLEmojiLabel_Common.jpg; sourceTree = "<group>"; };
 		3647036F1A384D4000597BC3 /* MLEmojiLabel_TableView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MLEmojiLabel_TableView.jpg; sourceTree = "<group>"; };
 		364A891C1929B07200BAFB8C /* MLEmojiLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLEmojiLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +177,8 @@
 		364A89461929B07200BAFB8C /* MLEmojiLabelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MLEmojiLabelTests-Info.plist"; sourceTree = "<group>"; };
 		364A89481929B07200BAFB8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		364A894A1929B07200BAFB8C /* MLEmojiLabelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLEmojiLabelTests.m; sourceTree = "<group>"; };
+		365FA0991B57B7770094D200 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		365FA09A1B57B7770094D200 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		369EBEC41929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg_ios7@2x.png"; sourceTree = "<group>"; };
 		369EBEC51929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkgHL_ios7@2x.png"; sourceTree = "<group>"; };
 		369EE2DD19AB2BE100A93160 /* MLEmojiLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLEmojiLabel.h; sourceTree = "<group>"; };
@@ -404,12 +404,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		365FA0981B57B7770094D200 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				365FA0991B57B7770094D200 /* TTTAttributedLabel.h */,
+				365FA09A1B57B7770094D200 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
 		36C3B63D192B3D7A00B6063D /* MLEmoji */ = {
 			isa = PBXGroup;
 			children = (
+				365FA0981B57B7770094D200 /* TTTAttributedLabel */,
 				369EE2DD19AB2BE100A93160 /* MLEmojiLabel.h */,
 				369EE2DE19AB2BE100A93160 /* MLEmojiLabel.m */,
-				36C3B6AC192B3D7A00B6063D /* TTTAttributedLabel */,
 				36C3B63E192B3D7A00B6063D /* Expression */,
 				36E2DB301999DBC900F8AF41 /* expression.plist */,
 				36C3B7DE192C6CEE00B6063D /* expressionImage.plist */,
@@ -527,15 +536,6 @@
 				36C3B6A7192B3D7A00B6063D /* Expression_9@2x.png */,
 			);
 			path = Expression;
-			sourceTree = "<group>";
-		};
-		36C3B6AC192B3D7A00B6063D /* TTTAttributedLabel */ = {
-			isa = PBXGroup;
-			children = (
-				364385B31A36E9F800C220CF /* TTTAttributedLabel.h */,
-				364385B41A36E9F800C220CF /* TTTAttributedLabel.m */,
-			);
-			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -752,7 +752,7 @@
 				364A89361929B07200BAFB8C /* ViewController.m in Sources */,
 				364385B21A369B0E00C220CF /* EmojiTableViewController.m in Sources */,
 				364A89301929B07200BAFB8C /* AppDelegate.m in Sources */,
-				364385B51A36E9F800C220CF /* TTTAttributedLabel.m in Sources */,
+				365FA09B1B57B7770094D200 /* TTTAttributedLabel.m in Sources */,
 				369EE2DF19AB2BE100A93160 /* MLEmojiLabel.m in Sources */,
 				364A892C1929B07200BAFB8C /* main.m in Sources */,
 				364385B11A369B0E00C220CF /* EmojiTableViewCell.m in Sources */,
