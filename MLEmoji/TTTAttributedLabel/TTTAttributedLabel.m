@@ -186,9 +186,7 @@ static inline NSDictionary * NSAttributedStringAttributesFromLabel(TTTAttributed
         if (label.numberOfLines == 1) {
             paragraphStyle.lineBreakMode = label.lineBreakMode;
         } else {
-            //MARK: molon修改从word。。修改为NSLineBreakByCharWrapping
-            paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
-            //..
+            paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         }
 
         [mutableAttributes setObject:paragraphStyle forKey:(NSString *)kCTParagraphStyleAttributeName];
@@ -208,9 +206,7 @@ static inline NSDictionary * NSAttributedStringAttributesFromLabel(TTTAttributed
         CGFloat lineHeightMultiple = label.lineHeightMultiple;
         CGFloat firstLineIndent = label.firstLineIndent;
 
-        //MARK: molon修改从word。。修改为kCTLineBreakByCharWrapping
-        CTLineBreakMode lineBreakMode = kCTLineBreakByCharWrapping;
-        //..
+        CTLineBreakMode lineBreakMode = kCTLineBreakByWordWrapping;
         if (label.numberOfLines == 1) {
             lineBreakMode = CTLineBreakModeFromTTTLineBreakMode(label.lineBreakMode);
         }
