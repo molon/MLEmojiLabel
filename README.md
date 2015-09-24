@@ -1,6 +1,9 @@
 #[MLLabel](https://github.com/molon/MLLabel)#
 *如果App不支持iOS7以下的话，建议使用iOS7新特性TextKit编写的图文链接混排[MLLabel](https://github.com/molon/MLLabel)，仅支持iOS7+*  
 
+**My library does not seek any reward,
+but if you use this library, tell me if you like. :)**
+
 MLEmojiLabel描述
 ============
 
