@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		364385B11A369B0E00C220CF /* EmojiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 364385AE1A369B0D00C220CF /* EmojiTableViewCell.m */; };
 		364385B21A369B0E00C220CF /* EmojiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 364385B01A369B0D00C220CF /* EmojiTableViewController.m */; };
-		364703701A384D4000597BC3 /* MLEmojiLabel_Common.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3647036E1A384D4000597BC3 /* MLEmojiLabel_Common.jpg */; };
-		364703711A384D4000597BC3 /* MLEmojiLabel_TableView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3647036F1A384D4000597BC3 /* MLEmojiLabel_TableView.jpg */; };
 		364A89201929B07200BAFB8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A891F1929B07200BAFB8C /* Foundation.framework */; };
 		364A89221929B07200BAFB8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89211929B07200BAFB8C /* CoreGraphics.framework */; };
 		364A89241929B07200BAFB8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364A89231929B07200BAFB8C /* UIKit.framework */; };
@@ -29,7 +27,6 @@
 		366895831BCF5998002687F6 /* expressionImage_custom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 366895811BCF5998002687F6 /* expressionImage_custom.plist */; settings = {ASSET_TAGS = (); }; };
 		369EBEC61929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369EBEC41929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png */; };
 		369EBEC71929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369EBEC51929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png */; };
-		36C4DBC319790BAA00731042 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 36C4DBC119790BAA00731042 /* README.md */; };
 		ADB1BD9431EBE7E827F3B0C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 482711D34698219B52DCB943 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,8 +46,6 @@
 		364385AE1A369B0D00C220CF /* EmojiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTableViewCell.m; sourceTree = "<group>"; };
 		364385AF1A369B0D00C220CF /* EmojiTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiTableViewController.h; sourceTree = "<group>"; };
 		364385B01A369B0D00C220CF /* EmojiTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTableViewController.m; sourceTree = "<group>"; };
-		3647036E1A384D4000597BC3 /* MLEmojiLabel_Common.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MLEmojiLabel_Common.jpg; sourceTree = "<group>"; };
-		3647036F1A384D4000597BC3 /* MLEmojiLabel_TableView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MLEmojiLabel_TableView.jpg; sourceTree = "<group>"; };
 		364A891C1929B07200BAFB8C /* MLEmojiLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLEmojiLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		364A891F1929B07200BAFB8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		364A89211929B07200BAFB8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -74,7 +69,6 @@
 		366895811BCF5998002687F6 /* expressionImage_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expressionImage_custom.plist; sourceTree = "<group>"; };
 		369EBEC41929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg_ios7@2x.png"; sourceTree = "<group>"; };
 		369EBEC51929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkgHL_ios7@2x.png"; sourceTree = "<group>"; };
-		36C4DBC119790BAA00731042 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		482711D34698219B52DCB943 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0B5B4AEFFCE9FE0B2B00171 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,9 +101,6 @@
 		364A89131929B07200BAFB8C = {
 			isa = PBXGroup;
 			children = (
-				3647036E1A384D4000597BC3 /* MLEmojiLabel_Common.jpg */,
-				3647036F1A384D4000597BC3 /* MLEmojiLabel_TableView.jpg */,
-				36C4DBC119790BAA00731042 /* README.md */,
 				364A89251929B07200BAFB8C /* MLEmojiLabel */,
 				364A89441929B07200BAFB8C /* MLEmojiLabelTests */,
 				364A891E1929B07200BAFB8C /* Frameworks */,
@@ -277,14 +268,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				364703701A384D4000597BC3 /* MLEmojiLabel_Common.jpg in Resources */,
 				366895831BCF5998002687F6 /* expressionImage_custom.plist in Resources */,
 				364A89381929B07200BAFB8C /* Images.xcassets in Resources */,
 				369EBEC61929B320008CE3DB /* ReceiverTextNodeBkg_ios7@2x.png in Resources */,
 				364A892A1929B07200BAFB8C /* InfoPlist.strings in Resources */,
 				364A89331929B07200BAFB8C /* Main.storyboard in Resources */,
-				364703711A384D4000597BC3 /* MLEmojiLabel_TableView.jpg in Resources */,
-				36C4DBC319790BAA00731042 /* README.md in Resources */,
 				366895821BCF5998002687F6 /* expression_custom.plist in Resources */,
 				369EBEC71929B320008CE3DB /* ReceiverTextNodeBkgHL_ios7@2x.png in Resources */,
 			);
