@@ -1,0 +1,5 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/MLEmojiLabel" "${PODS_ROOT}/Headers/Public/TTTAttributedLabel"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/MLEmojiLabel" -isystem "${PODS_ROOT}/Headers/Public/TTTAttributedLabel"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"MLEmojiLabel" -l"TTTAttributedLabel" -framework "CoreGraphics" -framework "CoreText" -framework "QuartzCore" -framework "UIKit"
+PODS_ROOT = ${SRCROOT}/Pods
