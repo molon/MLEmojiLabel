@@ -1,0 +1,17 @@
+PODS:
+  - MLEmojiLabel (1.0.0):
+    - TTTAttributedLabel (~> 1.13.4)
+  - TTTAttributedLabel (1.13.4)
+
+DEPENDENCIES:
+  - MLEmojiLabel (from `../MLEmojiLabel.podspec`)
+
+EXTERNAL SOURCES:
+  MLEmojiLabel:
+    :path: "../MLEmojiLabel.podspec"
+
+SPEC CHECKSUMS:
+  MLEmojiLabel: ceeab17d10d296cc00636bf201c8da597fdede10
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+
+COCOAPODS: 0.38.2
