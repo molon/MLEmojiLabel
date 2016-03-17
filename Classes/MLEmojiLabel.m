@@ -584,7 +584,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 
 - (void)setCustomEmojiRegex:(NSString *)customEmojiRegex
 {
-    _customEmojiRegex = customEmojiRegex;
+    _customEmojiRegex = [customEmojiRegex copy];
     
     if (customEmojiRegex&&customEmojiRegex.length>0) {
         self.customEmojiRegularExpression = [[MLEmojiLabelRegexPlistManager sharedInstance]regularExpressionForRegex:customEmojiRegex];
@@ -601,7 +601,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         customEmojiPlistName = [customEmojiPlistName stringByAppendingString:@".plist"];
     }
     
-    _customEmojiPlistName = customEmojiPlistName;
+    _customEmojiPlistName = [customEmojiPlistName copy];
     
     if (customEmojiPlistName&&customEmojiPlistName.length>0) {
         self.customEmojiDictionary = [[MLEmojiLabelRegexPlistManager sharedInstance]emojiDictForKey:customEmojiPlistName];
@@ -618,7 +618,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         customEmojiBundleName = [customEmojiBundleName stringByAppendingString:@".bundle"];
     }
     
-    _customEmojiBundleName = customEmojiBundleName;
+    _customEmojiBundleName = [customEmojiBundleName copy];
     
     self.text = self.emojiText; //简单重新绘制处理下
 }
