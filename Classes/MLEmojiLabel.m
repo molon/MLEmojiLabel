@@ -267,7 +267,6 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 {
     [super drawStrike:frame inRect:rect context:c];
     
-    //PS:这个是在TTT里drawFramesetter....方法最后做了修改的基础上。
     CGFloat emojiWith = self.font.lineHeight*kEmojiWidthRatioWithLineHeight;
     CGFloat emojiOriginYOffset = self.font.lineHeight*kEmojiOriginYOffsetRatioWithLineHeight;
     
