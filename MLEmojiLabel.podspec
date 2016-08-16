@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = "MLEmojiLabel"
-s.version      = "1.0.1"
+s.version      = "1.0.2"
 s.summary      = "Autolink @,#xx#,phone,website,email and custom expression for TTTAttributedLabel."
 
 s.homepage     = 'https://github.com/molon/MLEmojiLabel'

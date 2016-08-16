@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 molon. All rights reserved.
 //
 
-#import "TTTAttributedLabel.h"
+#import <TTTAttributedLabel/TTTAttributedLabel.h>
 
 
 typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
